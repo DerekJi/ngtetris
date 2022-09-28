@@ -1,0 +1,12 @@
+<div>
+  <button (click)="onClick()"
+      (pointerdown)="onKeyDown()"
+      (pointerup)="onKeyUp()" 
+      (pointerleave)="onKeyUp()"
+    [ngClass]="[ keyDownClass, size ]"
+    [title]="action"
+  >
+  <ng-content></ng-content>
+  </button>
+  <div class="btn-label">{{ action }}</div>
+</div>

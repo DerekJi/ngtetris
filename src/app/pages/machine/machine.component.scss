@@ -1,0 +1,20 @@
+section {
+  margin: 0px auto;
+  border-radius: 16px;
+  border: 1px solid #00d6fa;
+  background-color: #00d6fa;
+  box-shadow: inset 0 0 15px #fff;
+  height: 100%;
+  max-width: 520px;
+
+  app-screen {
+    height: 50%;
+  }
+
+  app-keyboard {
+    height: 50%;
+    width: 100%;
+  }
+}
+
+

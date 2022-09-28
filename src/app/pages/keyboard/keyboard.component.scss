@@ -1,0 +1,31 @@
+section {
+  margin: 15px;
+}
+
+.row {
+  display: flex;
+  
+  margin: 12px 24px;
+  align-items: center;
+
+  .no-margin {
+    margin: 0;
+  }
+}
+
+.align-base { align-items: baseline; }
+
+.row-between { justify-content: space-between; }
+
+.row-around {
+  justify-content: space-around;
+}
+
+.font-48 { font-size: 48px;}
+
+.mr { margin-right: 20px; }
+.ml { margin-left: 20px; }
+.mt { margin-top: -25px; }
+.mb { margin-bottom: -20px; }
+
+.space-t { margin-top: 12px; }
