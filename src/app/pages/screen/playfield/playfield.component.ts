@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Constants } from 'src/app/shared/consts';
 import { BlockStatusColor } from 'src/app/shared/models/block-status.enum';
 
 @Component({
@@ -7,6 +8,9 @@ import { BlockStatusColor } from 'src/app/shared/models/block-status.enum';
   styleUrls: ['./playfield.component.scss']
 })
 export class PlayfieldComponent implements OnInit {
+
+  width = Constants.PlayfieldWidth;
+  height = Constants.PlayfieldHeight;
 
   constructor() { }
 

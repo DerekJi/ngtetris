@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, timer } from 'rxjs';
-import { pad } from 'src/app/shared/helpers';
+import { pad } from 'src/app/shared/helpers/functions';
 
 @Component({
   selector: 'app-time-indicator',

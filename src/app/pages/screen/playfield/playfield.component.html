@@ -1,8 +1,7 @@
 <section>
-  <ng-container *ngFor="let r of [].constructor(20)">
+  <ng-container *ngFor="let h of [].constructor(height)">
     <div class="pf-row">
-      {{ r }}
-      <ng-container *ngFor="let i of [].constructor(10)">
+      <ng-container *ngFor="let w of [].constructor(width)">
         <app-block [status]="empty"></app-block>
       </ng-container>
     </div>

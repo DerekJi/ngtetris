@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { pad } from 'src/app/shared/helpers';
+import { pad } from 'src/app/shared/helpers/functions';
 import { selectNextShape, selectScore, selectSpeedLevel } from 'src/app/shared/store/tetris.selectors';
 
 @Component({

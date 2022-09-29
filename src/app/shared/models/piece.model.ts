@@ -7,6 +7,14 @@ import { PieceShape } from "./piece-shape.enum";
 export interface PieceModel {
   shape: PieceShape;
   direction: PieceDirection;
+
+  /**
+   * the absolute Y axis position of the top-left block in the piece in the playfield. 
+   */
   top: number;
+
+  /**
+   * the absolute X axis position of the top-left block in the piece in the playfield. 
+   */
   left: number;
 }

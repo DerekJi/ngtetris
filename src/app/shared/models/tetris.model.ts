@@ -6,9 +6,17 @@ export interface TetrisModel {
   status: TetrisFsmState,
   score: number,
   speedLevel: number,
+
   currentPieceShape: PieceShape,
   currentPieceDirection: PieceDirection,
+
+  currentLeft: number;
+  currentTop: number;
+
   nextPieceShape: PieceShape,
   nextPieceDirection: PieceDirection,
-  soundsOn: boolean
+
+  soundsOn: boolean,
+
+  playfieldMatrix: number[][],
 }

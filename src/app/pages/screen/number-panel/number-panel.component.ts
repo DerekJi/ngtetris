@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { pad } from 'src/app/shared/helpers';
+import { pad } from 'src/app/shared/helpers/functions';
 
 @Component({
   selector: 'app-number-panel',
