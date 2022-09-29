@@ -1,0 +1,39 @@
+section {
+  position: relative;
+  height: 100%;
+}
+
+.panel {
+  margin: 0 12px 18px;
+
+  div {
+    margin: 0 0 6px;
+  }
+}
+
+.digital {
+  font-family: 'digital-7';
+  font-size: 2em;
+  text-align: right;
+}
+.label {
+  text-align: left;
+  font-size: 0.7em;
+}
+.padding {
+  color: lightgray;
+}
+
+.flex-around {  
+  justify-content: space-around;  
+}
+.flex-between {
+  justify-content: space-between;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+}

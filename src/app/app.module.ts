@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { PagesModule } from './pages/pages.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { tetrisReducer } from './shared/store/tetris.reducers';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     PagesModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ tetris: tetrisReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

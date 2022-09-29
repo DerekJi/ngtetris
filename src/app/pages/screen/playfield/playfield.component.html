@@ -1,0 +1,11 @@
+<section>
+  <ng-container *ngFor="let r of [].constructor(20)">
+    <div class="pf-row">
+      {{ r }}
+      <ng-container *ngFor="let i of [].constructor(10)">
+        <app-block [status]="empty"></app-block>
+      </ng-container>
+    </div>
+  </ng-container>
+
+</section>

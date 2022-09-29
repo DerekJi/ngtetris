@@ -1,0 +1,14 @@
+<div class="panel">
+  <div class="label">
+    <i>{{ label }}</i>
+  </div>
+  <ng-container *ngIf="next$ | async as matrix">
+    <div class="piece">
+      <div class="pf-row" *ngFor="let row of matrix">
+        <ng-container *ngFor="let b of row">
+          <app-block [status]="blockStatus(b)"></app-block>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,6 +1,14 @@
-# Ngtetris
+# Tetris
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.2, and [NgRX]() version 14.3.1
+
+## Concepts
+
+From https://tetris.wiki/Piece,
+
+> A *piece* in Tetris and similar games is a geometric shape consisting of a set of *blocks* that is moved as a unit. A *block* is the part of a piece that fills one unit of the *playfield*.
+
+
 
 ## Development server
 
