@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { selectSoundsOn } from 'src/app/shared/store/tetris.selectors';
@@ -8,7 +8,7 @@ import { selectSoundsOn } from 'src/app/shared/store/tetris.selectors';
   templateUrl: './sound-indicator.component.html',
   styleUrls: ['./sound-indicator.component.scss']
 })
-export class SoundIndicatorComponent implements OnInit {
+export class SoundIndicatorComponent {
 
   soundsOn$ = this.store.select(selectSoundsOn);
 
@@ -17,8 +17,4 @@ export class SoundIndicatorComponent implements OnInit {
   );
 
   constructor(private store: Store) { }
-
-  ngOnInit(): void {
-  }
-
 }

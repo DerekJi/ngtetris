@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BlockStatusColor } from 'src/app/shared/models/block-status.enum';
 
 @Component({
@@ -6,13 +6,9 @@ import { BlockStatusColor } from 'src/app/shared/models/block-status.enum';
   templateUrl: './block.component.html',
   styleUrls: ['./block.component.scss']
 })
-export class BlockComponent implements OnInit {
+export class BlockComponent {
 
   @Input() status: BlockStatusColor = BlockStatusColor.Empty;
   
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { map, timer } from 'rxjs';
 import { pad } from 'src/app/shared/helpers/functions';
 
@@ -7,7 +7,7 @@ import { pad } from 'src/app/shared/helpers/functions';
   templateUrl: './time-indicator.component.html',
   styleUrls: ['./time-indicator.component.scss']
 })
-export class TimeIndicatorComponent implements OnInit {
+export class TimeIndicatorComponent {
   private colonOn = false;
 
   time$ = timer(0, 1000).pipe(map(() => new Date()));
@@ -20,8 +20,4 @@ export class TimeIndicatorComponent implements OnInit {
   }))
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

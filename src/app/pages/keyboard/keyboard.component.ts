@@ -1,16 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-keyboard',
   templateUrl: './keyboard.component.html',
   styleUrls: ['./keyboard.component.scss']
 })
-export class KeyboardComponent implements OnInit {
-
-
+export class KeyboardComponent {
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

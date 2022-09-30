@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { pad } from 'src/app/shared/helpers/functions';
 
@@ -7,7 +7,7 @@ import { pad } from 'src/app/shared/helpers/functions';
   templateUrl: './number-panel.component.html',
   styleUrls: ['./number-panel.component.scss']
 })
-export class NumberPanelComponent implements OnInit {
+export class NumberPanelComponent {
   @Input() label: string = '';
   @Input() number$: Observable<number> = of(0);
 
@@ -16,8 +16,4 @@ export class NumberPanelComponent implements OnInit {
   );
   
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
