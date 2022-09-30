@@ -2,7 +2,7 @@ import { PieceDirection } from '../models/piece-direction.enum';
 import { PieceShape } from '../models/piece-shape.enum';
 import { getPieceBottom, getPieceLeft, getPieceMatrix, getPieceRight } from './piece.helper';
 
-fdescribe('piecematrix.helper', () => {
+describe('piecematrix.helper', () => {
   function verify(shape: PieceShape, direction: PieceDirection, 
                   expectedLeft: number,
                   expectedRight: number,

@@ -11,7 +11,7 @@ import { selectStatus } from 'src/app/shared/store/tetris.selectors';
 })
 export class StatusIndicatorComponent implements OnInit {
 
-  status$ = this.store.select(selectStatus).pipe(
+  paused$ = this.store.select(selectStatus).pipe(
     map((status) => status === TetrisFsmState.Paused ? 'on' : 'off'),
   );
 
