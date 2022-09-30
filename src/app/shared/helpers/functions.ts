@@ -31,6 +31,5 @@ export function hexToMatrix(v: number | undefined): number[][] {
     }
     result.push(row);
   }
-  console.table(result);
   return result;
 }

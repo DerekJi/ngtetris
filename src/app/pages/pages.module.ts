@@ -15,11 +15,13 @@ import { TimeIndicatorComponent } from './screen/time-indicator/time-indicator.c
 import { SoundButtonComponent } from './keyboard/button/sound-button.component';
 import { StartButtonComponent } from './keyboard/button/start-button.component';
 import { ResetButtonComponent } from './keyboard/button/reset-button.component';
+import { MovementButtonComponent } from './keyboard/button/movement-button.component';
 
 const buttons = [
   ResetButtonComponent,
   SoundButtonComponent,
   StartButtonComponent,
+  MovementButtonComponent,
 ];
 
 @NgModule({

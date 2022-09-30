@@ -64,10 +64,10 @@ export function removeFullRows(field: number[][]): number[][] {
  * @param size 
  * @returns 
  */
-export function getEmptyRow(size: number): number[] {
+export function getEmptyRow(size: number, initialValue: number = 0): number[] {
   var row: number[] = [];
   for (let r = 0; r < size; r++) {
-    row.push(0);      
+    row.push(initialValue);      
   }
   return row;
 }

@@ -1,10 +1,28 @@
-import { Constants } from "../consts";
 import { canMoveDown, canMoveLeft, canMoveRight, canRotateAntiClockwise, canRotateClockwise } from "../helpers/collision-detection.helper";
 import { getMoveDownModel, getMoveLeftModel, getMoveRightModel, getRotateAntiClockwiseModel, getRotateClockwiseModel } from "../helpers/moves.helper";
 import { getCurrentPiece } from "../helpers/piece.helper";
+import { MovementEvent } from "../models/movement.enum";
 import { PieceModel } from "../models/piece.model";
 import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../models/tetris.model";
+
+export function movementReducer(state: TetrisModel, { movement }: { movement: MovementEvent}): TetrisModel {
+  console.log(`Movement Reducer: ${movement}`);
+  switch (movement) {
+    case MovementEvent.Down:
+      return moveDownReducer(state);
+    case MovementEvent.Drop:
+      return dropReducer(state);
+    case MovementEvent.Left:
+      return moveLeftReducer(state);
+    case MovementEvent.Right:
+      return moveRightReducer(state);
+    case MovementEvent.RotateClockwise:
+      return rotateClockwiseReducer(state);
+    case MovementEvent.RotateAntiClockwise:
+      return rotateAntiClockwiseReducer(state);
+  }
+}
 
 /**
  * Move Left

@@ -1,14 +1,13 @@
 import { Constants } from "../consts";
+import { getEmptyRow } from "../helpers/fieldmatrix.helper";
 
 function buildInitialMatrix(initialValue: number = 0): number[][] {
   var matrix: number[][] = [];
-  [].constructor(Constants.PlayfieldHeight).forEach(() => {
-    var row: number[] = [];
-    [].constructor(Constants.PlayfieldWidth).forEach(() => {
-      row.push(initialValue);
-    })
-    matrix.push(row);
-  });
+
+  for (let i = 0; i < Constants.PlayfieldHeight; i++) {
+    var row: number[] = getEmptyRow(Constants.PlayfieldWidth, initialValue);
+    matrix.push(row);    
+  }
 
   return matrix;
 }
