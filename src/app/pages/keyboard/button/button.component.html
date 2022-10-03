@@ -6,7 +6,9 @@
     [ngClass]="[ keyDownClass, size ]"
     [title]="action"
   >
-  <ng-content></ng-content>
+  <span class="content">
+    <ng-content></ng-content>
+  </span>
   </span>
   <div class="btn-label">{{ action }}</div>
 </div>
