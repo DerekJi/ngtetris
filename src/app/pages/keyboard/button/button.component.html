@@ -1,12 +1,14 @@
 <div>
-  <button (click)="onClick()"
+  <span class="btn" (click)="onClick()"
       (pointerdown)="onKeyDown()"
       (pointerup)="onKeyUp()" 
       (pointerleave)="onKeyUp()"
     [ngClass]="[ keyDownClass, size ]"
     [title]="action"
   >
-  <ng-content></ng-content>
-  </button>
+  <span class="content">
+    <ng-content></ng-content>
+  </span>
+  </span>
   <div class="btn-label">{{ action }}</div>
 </div>

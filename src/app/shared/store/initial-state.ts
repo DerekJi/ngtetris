@@ -6,20 +6,20 @@ import { TetrisModel } from "../models/tetris.model";
 import { initialFieldMatrix } from "./initial-field-matrix";
 
 export const initialState: TetrisModel = {
-  status: TetrisFsmState.GameStarted,
+  status: TetrisFsmState.NotStarted,
   score: 0,
   speedLevel: 0,
 
-  nextPieceShape: PieceShape.J,
-  nextPieceDirection: PieceDirection.LEFT,
+  nextPieceShape: undefined,
+  nextPieceDirection: undefined,
 
-  currentPieceShape: PieceShape.J,
-  currentPieceDirection: PieceDirection.LEFT,
+  currentPieceShape: undefined,
+  currentPieceDirection: undefined,
 
   currentLeft: 3,
-  currentTop: Constants.PlayfieldHeight,
+  currentTop: -2,
 
-  soundsOn: false,
+  soundsOn: true,
 
   playfieldMatrix: initialFieldMatrix
 };

@@ -1,16 +1,8 @@
 import { PieceDirection } from '../models/piece-direction.enum';
 import { PieceShape } from '../models/piece-shape.enum';
 import { PieceModel } from '../models/piece.model';
+import { Position } from '../models/position.model';
 import { getEmptyRow, isFullRow, mergeCurrentPiece, removeFullRows } from './fieldmatrix.helper';
-
-class Position {
-  constructor(public x: number, public y: number) {}
-}
-
-function createPiece(shape: PieceShape, direction: PieceDirection, top: number, left: number): PieceModel {
-  var piece: PieceModel = { shape, direction, top, left };
-  return piece;
-}
 
 describe('fieldmatrix.helper => mergeCurrentPiece()', () => {
   var _field: number[][] = [];
@@ -35,7 +27,7 @@ describe('fieldmatrix.helper => mergeCurrentPiece()', () => {
 
   it('should merge piece', () => {
     // Arrange 1
-    var piece = createPiece(PieceShape.I, PieceDirection.UP, 1, 1);
+    var piece = new PieceModel(1, 1, PieceShape.I, PieceDirection.UP);
     var expected: Position[] = [
       new Position(2, 1),
       new Position(2, 2),
@@ -50,7 +42,7 @@ describe('fieldmatrix.helper => mergeCurrentPiece()', () => {
     verifyMerged(merged, expected);
 
     // Arrange 2
-    piece = createPiece(PieceShape.T, PieceDirection.LEFT, 6, 2);
+    piece = new PieceModel(2, 6, PieceShape.T, PieceDirection.LEFT);
     expected.push(new Position(3, 6));
     expected.push(new Position(2, 7));
     expected.push(new Position(3, 7));

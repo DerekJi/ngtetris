@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { canMoveDown, canMoveLeft, canMoveRight, collided } from "../helpers/collision-detection.helper";
+import { canMoveDown } from "../helpers/collision-detection.helper";
+import { mergeCurrentPiece } from "../helpers/fieldmatrix.helper";
 import { getPieceMatrix } from "../helpers/piece.helper";
 import { PieceModel } from "../models/piece.model";
 import { TetrisModel } from "../models/tetris.model";
@@ -26,22 +27,13 @@ export const selectCurrentLeft = createSelector(selectRoot, (root) => root.curre
 
 export const selectCurrentPiece = createSelector(selectRoot, 
   (root) => {
-      var piece: PieceModel = {
-        shape: root.currentPieceShape,
-        direction: root.currentPieceDirection,
-        top: root.currentTop,
-        left: root.currentLeft,
-      };
-      return piece;
+      return new PieceModel(root.currentLeft, root.currentTop, root.currentPieceShape, root.currentPieceDirection);
     });
 
 export const selectPlayfield = createSelector(selectRoot, (root) => root.playfieldMatrix);
 
-export const selectCanMoveLeft = createSelector(selectPlayfield, selectCurrentPiece, 
-  (field, currentPiece) => canMoveLeft(field, currentPiece));
-
-export const selectCanMoveRight = createSelector(selectPlayfield, selectCurrentPiece, 
-  (field, currentPiece) => canMoveRight(field, currentPiece));
-
 export const selectCanMoveDown = createSelector(selectPlayfield, selectCurrentPiece, 
   (field, currentPiece) => canMoveDown(field, currentPiece));
+
+export const selectFildeView = createSelector(selectPlayfield, selectCurrentPiece,
+  (field, piece) => mergeCurrentPiece(field, piece));
