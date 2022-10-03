@@ -13,7 +13,7 @@ function getRandomInt(min: number, max: number): number {
 }
 
 export function randomPieceShape(): PieceShape {
-  var index = getRandomInt(0, 6);
+  var index = getRandomInt(1, 7);
   return index as PieceShape;
 }
 

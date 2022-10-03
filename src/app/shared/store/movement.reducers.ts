@@ -1,10 +1,12 @@
 import { canMoveDown, collided } from "../helpers/collision-detection.helper";
+import { mergeCurrentPiece } from "../helpers/fieldmatrix.helper";
 import { getMoveDownModel, getMoveLeftModel, getMoveRightModel, getRotateAntiClockwiseModel, getRotateClockwiseModel } from "../helpers/moves.helper";
-import { getCurrentPiece } from "../helpers/piece.helper";
+import { getCurrentPiece, randomPieceDirection, randomPieceShape } from "../helpers/piece.helper";
 import { MovementEvent } from "../models/movement.enum";
 import { PieceModel } from "../models/piece.model";
 import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../models/tetris.model";
+import { initialState } from "./initial-state";
 
 export function movementReducer(state: TetrisModel, { movement }: { movement: MovementEvent}): TetrisModel {
   console.log(`Movement Reducer: ${movement}`);
@@ -34,7 +36,11 @@ export function moveLeftReducer(state: TetrisModel): TetrisModel {
     var currentPiece: PieceModel = getCurrentPiece(state);
     var movedPiece = getMoveLeftModel(currentPiece);
     var cannotMove = collided(state.playfieldMatrix, movedPiece);
-    if (!cannotMove) {    
+    if (cannotMove) {
+      if (!canMoveDown(state.playfieldMatrix, currentPiece)) {
+        return reachedBottomReducer(state);
+      }
+    } else {      
       return Object.assign({} as TetrisModel, state, {
         currentLeft: movedPiece.left,
       });
@@ -55,7 +61,11 @@ export function moveRightReducer(state: TetrisModel): TetrisModel {
     var currentPiece: PieceModel = getCurrentPiece(state);
     var movedPiece = getMoveRightModel(currentPiece);
     var cannotMove = collided(state.playfieldMatrix, movedPiece);
-    if (!cannotMove) {      
+    if (cannotMove) {
+      if (!canMoveDown(state.playfieldMatrix, currentPiece)) {
+        return reachedBottomReducer(state);
+      }
+    } else {      
       return Object.assign({} as TetrisModel, state, {
         currentLeft: movedPiece.left,
       });
@@ -76,7 +86,9 @@ export function moveDownReducer(state: TetrisModel): TetrisModel {
     var currentPiece: PieceModel = getCurrentPiece(state);
     var movedPiece = getMoveDownModel(currentPiece);
     var cannotMove = collided(state.playfieldMatrix, movedPiece);
-    if (!cannotMove) {      
+    if (cannotMove) {   
+      return reachedBottomReducer(state);  
+    } else {
       return Object.assign({} as TetrisModel, state, {
         currentTop: movedPiece.top,
       });
@@ -145,4 +157,22 @@ export function rotateAntiClockwiseReducer(state: TetrisModel): TetrisModel {
 
   // else: do nothing
   return Object.assign({} as TetrisModel, state);
+}
+
+function reachedBottomReducer(state: TetrisModel): TetrisModel {
+  if (state.status !== TetrisFsmState.GameStarted) {
+    return Object.assign({} as TetrisModel, state);
+  }
+
+  var currentPiece: PieceModel = getCurrentPiece(state);
+  var field = mergeCurrentPiece(state.playfieldMatrix, currentPiece);
+  return Object.assign({} as TetrisModel, state, {
+    playfieldMatrix: field,
+    currentTop: initialState.currentTop,
+    currentLeft: initialState.currentLeft,
+    currentPieceShape: state.nextPieceShape,
+    currentPieceDirection: state.nextPieceDirection,
+    nextPieceShape: randomPieceShape(),
+    nextPieceDirection: randomPieceDirection(),
+  });   
 }

@@ -26,12 +26,12 @@ export class PlayfieldComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit(): void {
-    // timer(0, Constants.TickIntervalMS).pipe(
-    //   tap(() => {
-    //     this.store.dispatch(TickAction());
-    //   })
-    // )
-    // .subscribe();
+    timer(0, Constants.TickIntervalMS).pipe(
+      tap(() => {
+        this.store.dispatch(TickAction());
+      })
+    )
+    .subscribe();
   }
 
   blockStatus(value: number): BlockStatusColor {
