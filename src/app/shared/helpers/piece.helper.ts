@@ -4,20 +4,40 @@ import { PieceDirection } from "../models/piece-direction.enum";
 import { PieceShape } from "../models/piece-shape.enum";
 import { TetrisModel } from "../models/tetris.model";
 import { PieceModel } from "../models/piece.model";
+import { getEmptyRow } from "./fieldmatrix.helper";
 
-export function getPieceMatrix(shape: PieceShape, direction: PieceDirection): number[][] {
-  var def = ShapeMatrixDefinitions.find(x => x.shape === shape && x.direction === direction);
-  return hexToMatrix(def?.value);
+function getRandomInt(min: number, max: number): number {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+export function randomPieceShape(): PieceShape {
+  var index = getRandomInt(0, 6);
+  return index as PieceShape;
+}
+
+export function randomPieceDirection(): PieceDirection {
+  var index = getRandomInt(0, 3);
+  return index as PieceDirection;
+}
+
+export function getPieceMatrix(shape?: PieceShape, direction?: PieceDirection): number[][] {
+  if (shape !== undefined && direction !== undefined) {
+    var def = ShapeMatrixDefinitions.find(x => x.shape === shape && x.direction === direction);
+    return hexToMatrix(def?.value);
+  }
+
+  var matrix: number[][] = [];
+  for (let col = 0; col < 4; col++) {
+    var row = getEmptyRow(4);
+    matrix.push(row);
+  }
+  return matrix;
 }
 
 export function getCurrentPiece(tetris: TetrisModel): PieceModel {
-  var currentPiece: PieceModel = {
-    shape: tetris.currentPieceShape,
-    direction: tetris.currentPieceDirection,
-    top: tetris.currentTop,
-    left: tetris.currentLeft,
-  };
-  return currentPiece;
+  return new PieceModel(tetris.currentLeft, tetris.currentTop, tetris.currentPieceShape, tetris.currentPieceDirection);
 }
 
 export function getPieceLeft(pieceMatrix: number[][]): number {

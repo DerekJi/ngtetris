@@ -20,14 +20,14 @@ export function getMoveDownModel(current: PieceModel): PieceModel {
 }
 
 export function getRotateClockwiseModel(current: PieceModel): PieceModel {
-  var direction: PieceDirection = (current.direction + 1) % 4;
+  var direction: PieceDirection = ((current.direction ?? 0) + 1) % 4;
   return Object.assign({}, current, {
     direction
   });
 }
 
 export function getRotateAntiClockwiseModel(current: PieceModel): PieceModel {
-  var direction: PieceDirection = current.direction === 0 ? 3 : current.direction - 1;
+  var direction: PieceDirection = ((current.direction ?? 0) === 0) ? 3 : (current.direction ?? 0) - 1;
   return Object.assign({}, current, {
     direction
   });

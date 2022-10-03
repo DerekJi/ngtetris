@@ -1,5 +1,5 @@
 <div>
-  <button (click)="onClick()"
+  <span class="btn" (click)="onClick()"
       (pointerdown)="onKeyDown()"
       (pointerup)="onKeyUp()" 
       (pointerleave)="onKeyUp()"
@@ -7,6 +7,6 @@
     [title]="action"
   >
   <ng-content></ng-content>
-  </button>
+  </span>
   <div class="btn-label">{{ action }}</div>
 </div>

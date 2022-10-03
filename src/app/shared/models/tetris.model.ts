@@ -7,14 +7,14 @@ export interface TetrisModel {
   score: number,
   speedLevel: number,
 
-  currentPieceShape: PieceShape,
-  currentPieceDirection: PieceDirection,
+  currentPieceShape?: PieceShape,
+  currentPieceDirection?: PieceDirection,
 
   currentLeft: number;
   currentTop: number;
 
-  nextPieceShape: PieceShape,
-  nextPieceDirection: PieceDirection,
+  nextPieceShape?: PieceShape,
+  nextPieceDirection?: PieceDirection,
 
   soundsOn: boolean,
 

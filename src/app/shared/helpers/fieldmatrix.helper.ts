@@ -1,8 +1,12 @@
 import { PieceModel } from "../models/piece.model";
+import { Position } from "../models/position.model";
 import { getPieceMatrix } from "./piece.helper";
 
 export function mergeCurrentPiece(field: number[][], currentPiece: PieceModel): number[][] {
-  var merged = Object.assign([], field);
+  var merged: number[][] = [];
+  for (var i = 0; i < field.length; i++)
+    merged[i] = field[i].slice();
+
   var piece = getPieceMatrix(currentPiece.shape, currentPiece.direction);
   for (var row = 0; row < 4; row++) {
     for (let col = 0; col < 4; col++) {
@@ -10,9 +14,9 @@ export function mergeCurrentPiece(field: number[][], currentPiece: PieceModel): 
       if (occupied) {
         var X = row + currentPiece.left;
         var Y = col + currentPiece.top;
-        var isEmptyInField = field[Y][X] === 0;
+        var isEmptyInField = X >= 0 && Y >= 0 && field[Y][X] === 0;
         if (isEmptyInField) {
-          field[Y][X] = 1;
+          merged[Y][X] = 1;
         }
       }
     }
@@ -70,4 +74,34 @@ export function getEmptyRow(size: number, initialValue: number = 0): number[] {
     row.push(initialValue);      
   }
   return row;
+}
+
+/**
+ * 
+ * @param width 
+ * @param height 
+ * @param initialValue 
+ */
+export function initField(width: number, height: number, initialValue: number = 0): number[][] {
+  var field: number[][] = [];
+  for (var i = 0; i < height; i++) {
+    field.push(getEmptyRow(width, initialValue));
+  }
+  return field;
+}
+
+/**
+ * 
+ * @param field 
+ * @param positions 
+ */
+export function setFieldOccupiedBy(field: number[][], positions: Position[]): void {
+  const fieldHight = field.length;
+  const fieldWidth = field[0].length;
+
+  for (let pos of positions) {
+    if (pos.x >= 0 && pos.x < fieldWidth && pos.y >= 0 && pos.y < fieldHight) {
+      field[pos.y][pos.x] = 1;
+    }
+  }
 }
