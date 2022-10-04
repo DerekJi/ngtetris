@@ -4,6 +4,9 @@ import { TetrisFsmState } from "./tetris-fsm-state.enum";
 
 export interface TetrisModel {
   status: TetrisFsmState,
+
+  powerOnCount: number,
+
   score: number,
   speedLevel: number,
 
@@ -17,6 +20,8 @@ export interface TetrisModel {
   nextPieceDirection?: PieceDirection,
 
   soundsOn: boolean,
+  audioBuffer?: AudioBuffer | null;
+  audioContext: AudioContext;
 
   playfieldMatrix: number[][],
 }

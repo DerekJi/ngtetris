@@ -16,17 +16,27 @@ import { SoundButtonComponent } from './keyboard/button/sound-button.component';
 import { StartButtonComponent } from './keyboard/button/start-button.component';
 import { ResetButtonComponent } from './keyboard/button/reset-button.component';
 import { MovementButtonComponent } from './keyboard/button/movement-button.component';
+import { PowerButtonComponent } from './keyboard/button/power-button.component';
+import { PlayfieldStartingComponent } from './screen/playfield/playfield-starting.component';
+import { PlayfieldReadyComponent } from './screen/playfield/playfield-ready.component';
 
 const buttons = [
+  PowerButtonComponent,
   ResetButtonComponent,
   SoundButtonComponent,
   StartButtonComponent,
   MovementButtonComponent,
 ];
 
+const playfields = [
+  PlayfieldStartingComponent,
+  PlayfieldReadyComponent,
+]
+
 @NgModule({
   declarations: [
     ...buttons,
+    ...playfields,
     MachineComponent,
     KeyboardComponent,
     ScreenComponent,

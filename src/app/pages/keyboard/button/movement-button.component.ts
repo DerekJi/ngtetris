@@ -21,3 +21,4 @@ export class MovementButtonComponent extends ButtonComponent {
     this.store.dispatch(MovementAction({ movement: this.event }));
   }
 }
+

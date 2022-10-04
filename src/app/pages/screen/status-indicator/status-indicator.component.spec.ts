@@ -47,7 +47,7 @@ describe('StatusIndicatorComponent', () => {
   });
 
   it('should be "off" when NotStarted', () => {    
-    verifyPaused(TetrisFsmState.NotStarted, 'off');
+    verifyPaused(TetrisFsmState.PoweredOn, 'off');
   });
 
   it('should be "off" when GameCompleted', () => {    

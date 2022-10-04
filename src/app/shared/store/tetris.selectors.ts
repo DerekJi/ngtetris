@@ -37,3 +37,6 @@ export const selectCanMoveDown = createSelector(selectPlayfield, selectCurrentPi
 
 export const selectFildeView = createSelector(selectPlayfield, selectCurrentPiece,
   (field, piece) => mergeCurrentPiece(field, piece));
+
+export const selectAudioContext = createSelector(selectRoot, (root) => root.audioContext);
+export const selectAudioBuffer = createSelector(selectRoot, (root) => root.audioBuffer);

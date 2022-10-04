@@ -1,4 +1,7 @@
 <section>
-  <app-playfield></app-playfield>
+  <app-playfield-starting *ngIf="poweredOn$ | async"></app-playfield-starting>
+  <app-playfield-ready *ngIf="ready$ | async"></app-playfield-ready>
+  <app-playfield *ngIf="gameRunning$ | async"></app-playfield>
+
   <app-info></app-info>
 </section>

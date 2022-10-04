@@ -1,5 +1,7 @@
 export enum TetrisFsmState {
-  NotStarted = 'NOT STARTED',
+  PoweredOff = 'Powered Off',
+  PoweredOn = 'Powered On',
+  Ready = 'READY',
   GameStarted = 'STARTED',
   Paused = 'PAUSED',
   GameCompleted = 'COMPLETED',
