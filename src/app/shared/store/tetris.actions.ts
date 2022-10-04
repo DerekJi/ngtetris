@@ -1,6 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { MovementEvent } from "../models/movement.enum";
 
+export const LoadAudioAction = createAction('[Tetris] Load Audio', props<{ context: AudioContext, buffer: AudioBuffer }>());
 export const ResetAction = createAction('[Tetris] Reset');
 export const ToggleSoundAction = createAction('[Tetris] Toggle Sound');
 export const ToggleStartPauseAction = createAction('[Tetris] Toggle Start/Pause');

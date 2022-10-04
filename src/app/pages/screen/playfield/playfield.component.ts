@@ -31,7 +31,7 @@ export class PlayfieldComponent implements OnInit {
         this.store.dispatch(TickAction());
       })
     )
-    .subscribe();
+    // .subscribe();
   }
 
   blockStatus(value: number): BlockStatusColor {

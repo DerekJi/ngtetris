@@ -17,6 +17,8 @@ export interface TetrisModel {
   nextPieceDirection?: PieceDirection,
 
   soundsOn: boolean,
+  audioBuffer?: AudioBuffer | null;
+  audioContext: AudioContext;
 
   playfieldMatrix: number[][],
 }
