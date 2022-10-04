@@ -51,7 +51,7 @@ export function removeFullRows(field: number[][]): number[][] {
 
   var pushed = 0;
   for (let i = field.length - 1; i >= 0; i--) {
-    var row = Object.assign([], field[i]);
+    var row = [ ... field[i]];
     if (!isFullRow(row)) {
       updated.push(row);
       pushed++;

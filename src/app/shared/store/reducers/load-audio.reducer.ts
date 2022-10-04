@@ -1,4 +1,4 @@
-import { TetrisModel } from "../models/tetris.model";
+import { TetrisModel } from "../../models/tetris.model";
 
 export function loadAudioReducer(state: TetrisModel, { context, buffer }: { context: AudioContext, buffer: AudioBuffer }): TetrisModel {
   if (state.audioBuffer != null && state.audioBuffer.length > 0) {

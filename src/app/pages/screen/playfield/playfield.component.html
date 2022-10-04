@@ -1,4 +1,4 @@
-<section>
+<section [ngClass]="status$ | async">
   <ng-container *ngIf="view$ | async as view">
     <div class="pf-row" *ngFor="let row of view">
       <ng-container *ngFor="let block of row">

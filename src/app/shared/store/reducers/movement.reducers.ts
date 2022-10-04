@@ -1,12 +1,13 @@
-import { canMoveDown, collided } from "../helpers/collision-detection.helper";
-import { mergeCurrentPiece } from "../helpers/fieldmatrix.helper";
-import { getMoveDownModel, getMoveLeftModel, getMoveRightModel, getRotateAntiClockwiseModel, getRotateClockwiseModel } from "../helpers/moves.helper";
-import { getCurrentPiece, randomPieceDirection, randomPieceShape } from "../helpers/piece.helper";
-import { MovementEvent } from "../models/movement.enum";
-import { PieceModel } from "../models/piece.model";
-import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
-import { TetrisModel } from "../models/tetris.model";
-import { initialState } from "./initial-state";
+import { canMoveDown, collided } from "../../helpers/collision-detection.helper";
+import { mergeCurrentPiece } from "../../helpers/fieldmatrix.helper";
+import { immutable } from "../../helpers/immutable.helper";
+import { getMoveDownModel, getMoveLeftModel, getMoveRightModel, getRotateAntiClockwiseModel, getRotateClockwiseModel } from "../../helpers/moves.helper";
+import { getCurrentPiece, randomPieceDirection, randomPieceShape } from "../../helpers/piece.helper";
+import { MovementEvent } from "../../models/movement.enum";
+import { PieceModel } from "../../models/piece.model";
+import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
+import { TetrisModel } from "../../models/tetris.model";
+import { initialState } from "../initial-state";
 
 export function movementReducer(state: TetrisModel, { movement }: { movement: MovementEvent}): TetrisModel {
   console.log(`Movement Reducer: ${movement}`);
@@ -41,14 +42,14 @@ export function moveLeftReducer(state: TetrisModel): TetrisModel {
         return reachedBottomReducer(state);
       }
     } else {      
-      return Object.assign({} as TetrisModel, state, {
+      return immutable.map(state, {
         currentLeft: movedPiece.left,
       });
     }
   }
 
   // else: do nothing
-  return Object.assign({} as TetrisModel, state);
+  return { ...state };
 }
 
 /**
@@ -66,14 +67,14 @@ export function moveRightReducer(state: TetrisModel): TetrisModel {
         return reachedBottomReducer(state);
       }
     } else {      
-      return Object.assign({} as TetrisModel, state, {
+      return immutable.map(state, {
         currentLeft: movedPiece.left,
       });
     }
   }
 
   // else: do nothing
-  return Object.assign({} as TetrisModel, state);
+  return { ...state };
 }
 
 /**
@@ -89,14 +90,14 @@ export function moveDownReducer(state: TetrisModel): TetrisModel {
     if (cannotMove) {   
       return reachedBottomReducer(state);  
     } else {
-      return Object.assign({} as TetrisModel, state, {
+      return immutable.map(state, {
         currentTop: movedPiece.top,
       });
     }
   }
 
   // else: do nothing
-  return Object.assign({} as TetrisModel, state);
+  return { ...state };
 }
 
 /**
@@ -110,13 +111,13 @@ export function dropReducer(state: TetrisModel): TetrisModel {
     while (canMoveDown(state.playfieldMatrix, currentPiece)) {
       currentPiece = getMoveDownModel(currentPiece);
     }
-    return Object.assign({} as TetrisModel, state, {
+    return immutable.map(state, {
       currentTop: currentPiece.top,
     });
   }
 
   // else: do nothing
-  return Object.assign({} as TetrisModel, state);
+  return { ...state };
 } 
 
 /**
@@ -130,14 +131,14 @@ export function rotateClockwiseReducer(state: TetrisModel): TetrisModel {
     var movedPiece = getRotateClockwiseModel(currentPiece);
     var cannotMove = collided(state.playfieldMatrix, movedPiece);
     if (!cannotMove) {    
-      return Object.assign({} as TetrisModel, state, {
+      return immutable.map(state, {
         currentPieceDirection: movedPiece.direction
       });
     }
   }
 
   // else: do nothing
-  return Object.assign({} as TetrisModel, state);
+  return { ...state };
 }
 
 /**
@@ -149,24 +150,24 @@ export function rotateAntiClockwiseReducer(state: TetrisModel): TetrisModel {
     var movedPiece = getRotateAntiClockwiseModel(currentPiece);
     var cannotMove = collided(state.playfieldMatrix, movedPiece);
     if (!cannotMove) {    
-      return Object.assign({} as TetrisModel, state, {
+      return immutable.map(state, {
         currentPieceDirection: movedPiece.direction
       });
     }
   }
 
   // else: do nothing
-  return Object.assign({} as TetrisModel, state);
+  return { ...state };
 }
 
 function reachedBottomReducer(state: TetrisModel): TetrisModel {
   if (state.status !== TetrisFsmState.GameStarted) {
-    return Object.assign({} as TetrisModel, state);
+    return { ...state };
   }
 
   var currentPiece: PieceModel = getCurrentPiece(state);
   var field = mergeCurrentPiece(state.playfieldMatrix, currentPiece);
-  return Object.assign({} as TetrisModel, state, {
+  return immutable.map(state, {
     playfieldMatrix: field,
     currentTop: initialState.currentTop,
     currentLeft: initialState.currentLeft,

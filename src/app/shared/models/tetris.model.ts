@@ -4,6 +4,9 @@ import { TetrisFsmState } from "./tetris-fsm-state.enum";
 
 export interface TetrisModel {
   status: TetrisFsmState,
+
+  powerOnCount: number,
+
   score: number,
   speedLevel: number,
 

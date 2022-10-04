@@ -1,11 +1,12 @@
-import { randomPieceDirection, randomPieceShape } from "../helpers/piece.helper";
-import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
-import { TetrisModel } from "../models/tetris.model";
+import { immutable } from "../../helpers/immutable.helper";
+import { randomPieceDirection, randomPieceShape } from "../../helpers/piece.helper";
+import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
+import { TetrisModel } from "../../models/tetris.model";
 
 export function toggleStartPauseReducer(state: TetrisModel): TetrisModel {
-  if (TetrisFsmState.NotStarted === state.status)
+  if (TetrisFsmState.Ready === state.status)
   {
-    return Object.assign({} as TetrisModel, state, {
+    return immutable.map(state, {
       status: TetrisFsmState.GameStarted ,
       currentPieceShape: randomPieceShape(),
       currentPieceDirection: randomPieceDirection(),
@@ -16,17 +17,17 @@ export function toggleStartPauseReducer(state: TetrisModel): TetrisModel {
 
   if (TetrisFsmState.GameStarted === state.status)
   {
-    return Object.assign({} as TetrisModel, state, {
+    return immutable.map(state, {
       status: TetrisFsmState.Paused,
     });
   }
 
   if (TetrisFsmState.Paused === state.status)
   {
-    return Object.assign({} as TetrisModel, state, {
+    return immutable.map(state, {
       status: TetrisFsmState.GameStarted,
     });
   }
   
-  return Object.assign({}, state);
+  return { ...state };
 }

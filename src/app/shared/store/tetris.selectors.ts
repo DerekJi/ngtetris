@@ -2,7 +2,6 @@ import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { canMoveDown } from "../helpers/collision-detection.helper";
 import { mergeCurrentPiece } from "../helpers/fieldmatrix.helper";
 import { getPieceMatrix } from "../helpers/piece.helper";
-import { AppAudioParams } from "../models/audio-params.model";
 import { PieceModel } from "../models/piece.model";
 import { TetrisModel } from "../models/tetris.model";
 
@@ -41,5 +40,3 @@ export const selectFildeView = createSelector(selectPlayfield, selectCurrentPiec
 
 export const selectAudioContext = createSelector(selectRoot, (root) => root.audioContext);
 export const selectAudioBuffer = createSelector(selectRoot, (root) => root.audioBuffer);
-export const selectAudioParams = createSelector(selectAudioContext, selectAudioBuffer, selectSoundsOn,
-  (context, buffer, enabled) => new AppAudioParams(enabled, context, buffer));

@@ -13,6 +13,10 @@ export class MachineComponent implements OnInit {
   constructor(private audioHelper: HttpService, private store: Store) { }
 
   ngOnInit(): void {
+    this.loadAudio();
+  }
+
+  loadAudio(): void {
     this.audioHelper.loadAsync().pipe(
       tap((buffer) => {
         this.store.dispatch(LoadAudioAction({ buffer, context: this.audioHelper.context }));

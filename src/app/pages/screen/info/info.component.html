@@ -1,4 +1,4 @@
-<section>
+<section [ngClass]="poweredOff$ | async">
 
   <app-number-panel label="SCORE" [number$]="score$"></app-number-panel>
   <app-number-panel label="SPEED LEVEL" [number$]="speedLevel$"></app-number-panel>
