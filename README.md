@@ -20,3 +20,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ## Deployment
 * Edit pipeline file: `.github/workflows/devops.yml`
 * If build succeeds, visit https://derekji.github.io/ngtetris
+
+## Code Coverage Graph
+![image](https://codecov.io/gh/DerekJi/ngtetris/branch/master/graphs/sunburst.svg?token=L3JYGSBJKZ)
