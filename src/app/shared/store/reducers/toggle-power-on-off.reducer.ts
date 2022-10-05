@@ -17,6 +17,7 @@ export function togglePowerOnOffReducer(state: TetrisModel): TetrisModel {
   } 
 
   return immutable.map(initialState, {
+    status: TetrisFsmState.PoweredOff,
     audioBuffer: state.audioBuffer,
     audioContext: state.audioContext,
   });

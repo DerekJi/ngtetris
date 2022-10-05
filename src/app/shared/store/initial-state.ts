@@ -3,7 +3,7 @@ import { TetrisModel } from "../models/tetris.model";
 import { initialFieldMatrix } from "./initial-field-matrix";
 
 export const initialState: TetrisModel = {
-  status: TetrisFsmState.PoweredOff,
+  status: TetrisFsmState.Ready,
 
   powerOnCount: 0,
 

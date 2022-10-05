@@ -19,6 +19,7 @@ import { MovementButtonComponent } from './keyboard/button/movement-button.compo
 import { PowerButtonComponent } from './keyboard/button/power-button.component';
 import { PlayfieldStartingComponent } from './screen/playfield/playfield-starting.component';
 import { PlayfieldReadyComponent } from './screen/playfield/playfield-ready.component';
+import { FieldTopReadyComponent } from './screen/field-top-ready/field-top-ready.component';
 
 const buttons = [
   PowerButtonComponent,
@@ -48,7 +49,8 @@ const playfields = [
     NextPiecePanelComponent,
     SoundIndicatorComponent,
     StatusIndicatorComponent,
-    TimeIndicatorComponent
+    TimeIndicatorComponent,
+    FieldTopReadyComponent
   ],
   imports: [
     CommonModule
