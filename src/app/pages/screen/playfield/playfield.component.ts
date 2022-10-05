@@ -20,6 +20,10 @@ export class PlayfieldComponent implements OnInit {
     map((status) => status.toLowerCase().replace(' ', '-'))
   );
 
+  ready$ = this.status$.pipe(
+    map((status) => status === 'ready' ? '' : 'hidden')
+  );
+
   view$ = this.store.select(selectFildeView).pipe(
     tap((view) => {
       this.height = view.length;

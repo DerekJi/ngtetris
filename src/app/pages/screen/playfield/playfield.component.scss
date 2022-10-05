@@ -4,6 +4,7 @@ section {
   height: 100%;
   border: 3px solid black;
   margin: -2px;
+  position: relative;
 
   div.pf-row {
     margin: -4px 0 -7px;
@@ -12,4 +13,14 @@ section {
 
 .powered-off {
   opacity: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+app-field-top-ready {
+  position: absolute;
+  top: 40%;
+  left: 20%;
 }
