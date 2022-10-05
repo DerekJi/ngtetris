@@ -1,6 +1,7 @@
 # Tetris
 
 [![DevOps](https://github.com/DerekJi/ngtetris/actions/workflows/deploy.yml/badge.svg)](https://github.com/DerekJi/ngtetris/actions/workflows/deploy.yml)
+[![codecov](https://codecov.io/gh/DerekJi/ngtetris/branch/master/graph/badge.svg?token=L3JYGSBJKZ)](https://codecov.io/gh/DerekJi/ngtetris)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.2, and [NgRX]() version 14.3.1
 
