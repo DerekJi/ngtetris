@@ -18,7 +18,12 @@ jobs:
         npm run build:prod
         
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+      run: |
+        # Replace `linux` below with the appropriate OS
+        # Options are `alpine`, `linux`, `macos`, `windows`
+        curl -Os https://uploader.codecov.io/latest/linux/codecov
+        chmod +x codecov
+        ./codecov
       
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.5
