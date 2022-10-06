@@ -1,8 +1,9 @@
+import { audio } from "../../helpers/audio.helper";
 import { canMoveDown, collided } from "../../helpers/collision-detection.helper";
 import { fieldHellper } from "../../helpers/fieldmatrix.helper";
 import { immutable } from "../../helpers/immutable.helper";
 import { getMoveDownModel, getMoveLeftModel, getMoveRightModel, getRotateAntiClockwiseModel, getRotateClockwiseModel } from "../../helpers/moves.helper";
-import { getCurrentPiece, randomPieceDirection, randomPieceShape } from "../../helpers/piece.helper";
+import { getCurrentPiece, getPieceMatrix, getPieceTop, randomPieceDirection, randomPieceShape } from "../../helpers/piece.helper";
 import { score } from "../../helpers/score.helper";
 import { MovementEvent } from "../../models/movement.enum";
 import { PieceModel } from "../../models/piece.model";
@@ -167,7 +168,28 @@ function reachedBottomReducer(state: TetrisModel): TetrisModel {
 
   var currentPiece: PieceModel = getCurrentPiece(state);
   var field = fieldHellper.mergeCurrentPiece(state.playfieldMatrix, currentPiece);
+
+  // Check 'GAME OVER'
+  if (state.currentTop < 1) {
+    var pieceMatrix = getPieceMatrix(state.currentPieceShape, state.currentPieceDirection);
+    var minTop = getPieceTop(pieceMatrix);
+    if (minTop === 0) {
+      return immutable.map(state, {
+        status: TetrisFsmState.GameOver,
+        playfieldMatrix: field,
+        currentTop: 0,
+        currentLeft: initialState.currentLeft,
+        currentPieceShape: undefined,
+        currentPieceDirection: undefined,
+        nextPieceShape: randomPieceShape(),
+        nextPieceDirection: randomPieceDirection(),
+        score: score.toBottom(state.score),
+      });   
+    }
+  }
+  
   var initialPieceTop = state.nextPieceShape && state.nextPieceDirection ? fieldHellper.initialPieceTop(state.nextPieceShape, state.nextPieceDirection) : -1;
+
   return immutable.map(state, {
     playfieldMatrix: field,
     currentTop: initialPieceTop,

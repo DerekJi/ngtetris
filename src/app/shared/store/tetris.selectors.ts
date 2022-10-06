@@ -49,4 +49,4 @@ export const selectShouldRemove = createSelector(selectFullRowsCount, selectStat
   (has, status) => has && status === TetrisFsmState.GameStarted);
 
 export const selectGameRunning = createSelector(selectStatus, selectShouldRemove,
-  (status, should) => !should && (status === TetrisFsmState.GameStarted || status === TetrisFsmState.Paused));
+  (status, should) => !should && (status === TetrisFsmState.GameStarted || status === TetrisFsmState.Paused || status === TetrisFsmState.GameOver));

@@ -10,8 +10,9 @@ import { ButtonComponent } from './button.component';
 })
 export class PowerButtonComponent extends ButtonComponent {
 
-  @Input() override action: string = 'On/Off';
+  @Input() override action: string = 'ON/OFF';
   @Input() override size: 'small' | 'normal' = 'small';
+  @Input() override button = 'btn-power';
 
   constructor(private store: Store) { super(); }
 

@@ -13,7 +13,7 @@ export class MovementButtonComponent extends ButtonComponent {
 
   @Input() event: MovementEvent = MovementEvent.RotateClockwise;
   @Input() override action: string = '';
-  @Input() override size: 'small' | 'normal' = 'normal';
+  @Input() override size: 'small' | 'normal' | 'long' = 'normal';
 
   constructor(private store: Store) { super(); }
 

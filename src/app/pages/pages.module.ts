@@ -21,6 +21,7 @@ import { PlayfieldStartingComponent } from './screen/playfield/playfield-startin
 import { PlayfieldReadyComponent } from './screen/playfield/playfield-ready.component';
 import { FieldTopReadyComponent } from './screen/field-top-ready/field-top-ready.component';
 import { PlayfieldRemovingComponent } from './screen/playfield/playfield-removing.component';
+import { FieldTopGameoverComponent } from './screen/field-top-gameover/field-top-gameover.component';
 
 const buttons = [
   PowerButtonComponent,
@@ -52,7 +53,8 @@ const playfields = [
     SoundIndicatorComponent,
     StatusIndicatorComponent,
     TimeIndicatorComponent,
-    FieldTopReadyComponent
+    FieldTopReadyComponent,
+    FieldTopGameoverComponent
   ],
   imports: [
     CommonModule
