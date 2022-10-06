@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ToggleStartPauseAction } from 'src/app/shared/store/tetris.actions';
+import { actions } from 'src/app/shared/store/tetris.actions';
 import { ButtonComponent } from './button.component';
 
 @Component({
@@ -16,6 +16,6 @@ export class StartButtonComponent extends ButtonComponent {
   constructor(private store: Store) { super(); }
 
   override onClick(): void {
-    this.store.dispatch(ToggleStartPauseAction());
+    this.store.dispatch(actions.ToggleStartPause());
   }
 }

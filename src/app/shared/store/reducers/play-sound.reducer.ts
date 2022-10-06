@@ -35,9 +35,20 @@ export function playStatusSoundReducer(state: TetrisModel, { status }: { status:
             audio.playGameStart(source); 
           }
           break;
-        case TetrisFsmState.GameCompleted:
+        case TetrisFsmState.GameOver:
           audio.playGameOver(source); break;
       }
+    }
+  }
+
+  return {...state};
+}
+
+export function playClearSoundReducer(state: TetrisModel): TetrisModel {
+  if (state.soundsOn === true) {
+    var source = audio.getSource(state);
+    if (source) {
+      audio.playClear(source); 
     }
   }
 

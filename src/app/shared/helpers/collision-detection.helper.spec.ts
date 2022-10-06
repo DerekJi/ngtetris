@@ -4,7 +4,7 @@ import { PieceShape } from "../models/piece-shape.enum";
 import { PieceModel } from "../models/piece.model";
 import { Position } from "../models/position.model";
 import { collided } from "./collision-detection.helper";
-import { getEmptyRow, initField, setFieldOccupiedBy } from "./fieldmatrix.helper";
+import { fieldHellper } from "./fieldmatrix.helper";
 
 describe('collision-detection.helper => collided', () => {
   const fieldHight: number = 6;
@@ -18,7 +18,7 @@ describe('collision-detection.helper => collided', () => {
   let iRight: PieceModel;  
 
   beforeEach(() => {
-    field = initField(fieldWidth, fieldHight, 0);
+    field = fieldHellper.initialize(fieldWidth, fieldHight, 0);
 
     tUp = new PieceModel(8, 1, PieceShape.T, PieceDirection.UP);
     tRight = new PieceModel(8, 1, PieceShape.T, PieceDirection.RIGHT);
@@ -37,7 +37,7 @@ describe('collision-detection.helper => collided', () => {
      * ◻◻◻▣▣▣◻◻▣▣
      * ◻◻◻◻◻▣◻▣▣◻
      */
-    setFieldOccupiedBy(field, [
+     fieldHellper.setFieldOccupiedBy(field, [
       new Position(3, 4),
       new Position(4, 1),
       new Position(4, 2),

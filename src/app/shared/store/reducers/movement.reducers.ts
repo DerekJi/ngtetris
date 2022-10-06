@@ -1,8 +1,9 @@
 import { canMoveDown, collided } from "../../helpers/collision-detection.helper";
-import { mergeCurrentPiece } from "../../helpers/fieldmatrix.helper";
+import { fieldHellper } from "../../helpers/fieldmatrix.helper";
 import { immutable } from "../../helpers/immutable.helper";
 import { getMoveDownModel, getMoveLeftModel, getMoveRightModel, getRotateAntiClockwiseModel, getRotateClockwiseModel } from "../../helpers/moves.helper";
 import { getCurrentPiece, randomPieceDirection, randomPieceShape } from "../../helpers/piece.helper";
+import { score } from "../../helpers/score.helper";
 import { MovementEvent } from "../../models/movement.enum";
 import { PieceModel } from "../../models/piece.model";
 import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
@@ -10,7 +11,6 @@ import { TetrisModel } from "../../models/tetris.model";
 import { initialState } from "../initial-state";
 
 export function movementReducer(state: TetrisModel, { movement }: { movement: MovementEvent}): TetrisModel {
-  console.log(`Movement Reducer: ${movement}`);
   switch (movement) {
     case MovementEvent.Down:
       return moveDownReducer(state);
@@ -166,14 +166,16 @@ function reachedBottomReducer(state: TetrisModel): TetrisModel {
   }
 
   var currentPiece: PieceModel = getCurrentPiece(state);
-  var field = mergeCurrentPiece(state.playfieldMatrix, currentPiece);
+  var field = fieldHellper.mergeCurrentPiece(state.playfieldMatrix, currentPiece);
+  var initialPieceTop = state.nextPieceShape && state.nextPieceDirection ? fieldHellper.initialPieceTop(state.nextPieceShape, state.nextPieceDirection) : -1;
   return immutable.map(state, {
     playfieldMatrix: field,
-    currentTop: initialState.currentTop,
+    currentTop: initialPieceTop,
     currentLeft: initialState.currentLeft,
     currentPieceShape: state.nextPieceShape,
     currentPieceDirection: state.nextPieceDirection,
     nextPieceShape: randomPieceShape(),
     nextPieceDirection: randomPieceDirection(),
+    score: score.toBottom(state.score),
   });   
 }

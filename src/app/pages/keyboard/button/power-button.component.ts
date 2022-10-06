@@ -1,11 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, takeUntil, tap, timer } from 'rxjs';
-import { Constants } from 'src/app/shared/consts';
-import { music } from 'src/app/shared/models/audio-clip.model';
-import { TetrisFsmState } from 'src/app/shared/models/tetris-fsm-state.enum';
-import { PowerOnAction, PowerOnTickAction, ResetAction, ToggleStartPauseAction } from 'src/app/shared/store/tetris.actions';
-import { selectStatus } from 'src/app/shared/store/tetris.selectors';
+import { actions } from 'src/app/shared/store/tetris.actions';
 import { ButtonComponent } from './button.component';
 
 @Component({
@@ -21,6 +16,6 @@ export class PowerButtonComponent extends ButtonComponent {
   constructor(private store: Store) { super(); }
 
   override onClick(): void {
-    this.store.dispatch(PowerOnAction());
+    this.store.dispatch(actions.PowerOn());
   }
 }

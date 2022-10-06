@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MovementEvent } from 'src/app/shared/models/movement.enum';
-import { MovementAction } from 'src/app/shared/store/tetris.actions';
+import { actions } from 'src/app/shared/store/tetris.actions';
 import { ButtonComponent } from './button.component';
 
 @Component({
@@ -18,7 +18,7 @@ export class MovementButtonComponent extends ButtonComponent {
   constructor(private store: Store) { super(); }
 
   override onClick(): void {
-    this.store.dispatch(MovementAction({ movement: this.event }));
+    this.store.dispatch(actions.Movement({ movement: this.event }));
   }
 }
 

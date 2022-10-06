@@ -1,15 +1,9 @@
 import { Constants } from "../consts";
-import { getEmptyRow } from "../helpers/fieldmatrix.helper";
+import { fieldHellper } from "../helpers/fieldmatrix.helper";
 
-function buildInitialMatrix(initialValue: number = 0): number[][] {
-  var matrix: number[][] = [];
-
-  for (let i = 0; i < Constants.PlayfieldHeight; i++) {
-    var row: number[] = getEmptyRow(Constants.PlayfieldWidth, initialValue);
-    matrix.push(row);    
-  }
-
-  return matrix;
+function init() {
+  var field = fieldHellper.initialize(Constants.PlayfieldWidth, Constants.PlayfieldHeight, 0);
+  return field;
 }
 
-export const initialFieldMatrix: number[][] = buildInitialMatrix();
+export const initialFieldMatrix: number[][] = init();

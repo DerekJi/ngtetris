@@ -1,11 +1,18 @@
+import { PieceDirection } from "../models/piece-direction.enum";
+import { PieceShape } from "../models/piece-shape.enum";
 import { PieceModel } from "../models/piece.model";
 import { Position } from "../models/position.model";
-import { getPieceMatrix } from "./piece.helper";
+import { getPieceBottom, getPieceMatrix } from "./piece.helper";
 
-export function mergeCurrentPiece(field: number[][], currentPiece: PieceModel): number[][] {
-  var merged: number[][] = [];
+function clone(field: number[][]): number[][] {
+  var cloned: number[][] = [];
   for (var i = 0; i < field.length; i++)
-    merged[i] = field[i].slice();
+    cloned[i] = [...field[i]];
+  return cloned;
+}
+
+function mergeCurrentPiece(field: number[][], currentPiece: PieceModel): number[][] {
+  var merged: number[][] = clone(field);
 
   var piece = getPieceMatrix(currentPiece.shape, currentPiece.direction);
   for (var row = 0; row < 4; row++) {
@@ -30,7 +37,7 @@ export function mergeCurrentPiece(field: number[][], currentPiece: PieceModel): 
  * @param row 
  * @returns true/false
  */
-export function isFullRow(row: number[]): boolean {
+function isFullRow(row: number[]): boolean {
   var result = true;
   for (const value of row) {
     if (value < 1) {
@@ -46,7 +53,7 @@ export function isFullRow(row: number[]): boolean {
  * @param field 
  * @returns 
  */
-export function removeFullRows(field: number[][]): number[][] {
+function removeFullRows(field: number[][]): number[][] {
   var updated: number[][] = [];
 
   var pushed = 0;
@@ -65,10 +72,24 @@ export function removeFullRows(field: number[][]): number[][] {
 
 /**
  * 
+ * @param field 
+ * @returns 
+ */
+function countFullRows(field: number[][]): number {
+  var count = 0;
+  for (let i = field.length - 1; i >= 0; i--) {
+    var row = [ ... field[i]];
+    count += isFullRow(row) ? 1 : 0;
+  }
+  return count;
+}
+
+/**
+ * 
  * @param size 
  * @returns 
  */
-export function getEmptyRow(size: number, initialValue: number = 0): number[] {
+function getEmptyRow(size: number, initialValue: number = 0): number[] {
   var row: number[] = [];
   for (let r = 0; r < size; r++) {
     row.push(initialValue);      
@@ -82,7 +103,7 @@ export function getEmptyRow(size: number, initialValue: number = 0): number[] {
  * @param height 
  * @param initialValue 
  */
-export function initField(width: number, height: number, initialValue: number = 0): number[][] {
+function initField(width: number, height: number, initialValue: number = 0): number[][] {
   var field: number[][] = [];
   for (var i = 0; i < height; i++) {
     field.push(getEmptyRow(width, initialValue));
@@ -95,7 +116,7 @@ export function initField(width: number, height: number, initialValue: number = 
  * @param field 
  * @param positions 
  */
-export function setFieldOccupiedBy(field: number[][], positions: Position[]): void {
+function setFieldOccupiedBy(field: number[][], positions: Position[]): void {
   const fieldHight = field.length;
   const fieldWidth = field[0].length;
 
@@ -104,4 +125,35 @@ export function setFieldOccupiedBy(field: number[][], positions: Position[]): vo
       field[pos.y][pos.x] = 1;
     }
   }
+}
+
+/**
+ * Ensure the lowest block top is 0
+ * @param shape 
+ * @param direction 
+ */
+function initialPieceTop(shape: PieceShape, direction: PieceDirection) {
+  var matrix = getPieceMatrix(shape, direction);
+  var bottom = getPieceBottom(matrix);
+  return -1 * bottom;
+}
+
+export const fieldHellper = {
+  initialize: initField,
+
+  initialPieceTop,
+
+  clone,
+
+  setFieldOccupiedBy,
+
+  getEmptyRow,
+
+  countFullRows,
+
+  removeFullRows,
+
+  isFullRow,
+
+  mergeCurrentPiece,
 }

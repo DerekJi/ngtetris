@@ -1,8 +1,31 @@
 export enum TetrisFsmState {
-  PoweredOff = 'Powered Off',
-  PoweredOn = 'Powered On',
+  /**
+   * Machine is powered off
+   */
+  PoweredOff = 'POWERED-OFF',
+
+  /**
+   * Machine is powered on. Will transit to READY automatically after a few secs
+   */
+  PoweredOn = 'POWERED-ON',
+
+  /**
+   * Game is ready to tart.
+   */
   Ready = 'READY',
+
+  /**
+   * Game started
+   */
   GameStarted = 'STARTED',
+
+  /**
+   * Game Paused
+   */
   Paused = 'PAUSED',
-  GameCompleted = 'COMPLETED',
+
+  /**
+   * Game Over.  Will transit to READY automatically after a few secs
+   */
+  GameOver = 'GAME-OVER',
 }

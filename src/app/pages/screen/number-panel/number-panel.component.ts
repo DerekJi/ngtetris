@@ -9,11 +9,13 @@ import { pad } from 'src/app/shared/helpers/functions';
 })
 export class NumberPanelComponent {
   @Input() label: string = '';
-  @Input() number$: Observable<number> = of(0);
+  @Input() number: number | null = 0;
 
-  padding$ = this.number$.pipe(
-    map((score) => pad(score, 6).replace(score.toString(), '')),
-  );
+  get padding() {
+    var num = this.number ?? 0;
+    var padding = pad(num, 6).replace(num.toString(), '');
+    return padding;
+  }
   
   constructor() { }
 }

@@ -2,39 +2,41 @@ import { createReducer, on } from "@ngrx/store";
 import { initialState } from "./initial-state";
 import { loadAudioReducer } from "./reducers/load-audio.reducer";
 import { movementReducer } from "./reducers/movement.reducers";
-import { playMovementSoundReducer, playStatusSoundReducer } from "./reducers/play-sound.reducer";
+import { playClearSoundReducer, playMovementSoundReducer, playStatusSoundReducer } from "./reducers/play-sound.reducer";
 import { resetReducer } from "./reducers/reset.reducer";
-import { LoadAudioAction, MovementAction, PowerOnAction, PowerOnTickAction, ResetAction, SetReadyAction, TickAction, ToggleSoundAction, ToggleStartPauseAction } from "./tetris.actions";
+import { actions } from "./tetris.actions";
 import { tickReducer } from "./reducers/tick.reducer";
 import { toggleSoundReducer } from "./reducers/toggle-sound.reducer";
 import { toggleStartPauseReducer } from "./reducers/toggle-start-pause.reducer";
 import { setReadyReducer } from "./reducers/set-ready.reducer";
-import { powerOnTickReducer } from "./reducers/power-on-tick.reducer";
 import { TetrisModel } from "../models/tetris.model";
 import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
 import { togglePowerOnOffReducer } from "./reducers/toggle-power-on-off.reducer";
+import { removeReducer } from "./reducers/remove.reducer";
 
 export const tetrisReducer = createReducer(initialState,
 
-  on(PowerOnAction, togglePowerOnOffReducer),
+  on(actions.PowerOn, togglePowerOnOffReducer),
 
-  // on(PowerOnTickAction, powerOnTickReducer),
+  on(actions.PlayStatusSound, (state: TetrisModel): TetrisModel => playStatusSoundReducer(state, { status: TetrisFsmState.PoweredOn })),
 
-  on(PowerOnTickAction, (state: TetrisModel): TetrisModel => playStatusSoundReducer(state, { status: TetrisFsmState.PoweredOn })),
+  on(actions.PlayClearSound, playClearSoundReducer),
 
-  on(SetReadyAction, setReadyReducer),
+  on(actions.SetReady, setReadyReducer),
 
-  on(LoadAudioAction, loadAudioReducer),
+  on(actions.LoadAudio, loadAudioReducer),
 
-  on(ResetAction, resetReducer),
+  on(actions.Reset, resetReducer),
 
-  on(ToggleSoundAction, toggleSoundReducer),
+  on(actions.ToggleSound, toggleSoundReducer),
 
-  on(ToggleStartPauseAction, toggleStartPauseReducer),
+  on(actions.ToggleStartPause, toggleStartPauseReducer),
 
-  on(MovementAction, playMovementSoundReducer),
+  on(actions.Movement, playMovementSoundReducer),
 
-  on(MovementAction, movementReducer),
+  on(actions.Movement, movementReducer),
 
-  on(TickAction, tickReducer),
+  on(actions.Tick, tickReducer),
+
+  on(actions.RemoveFullRows, removeReducer),
 );
