@@ -8,7 +8,7 @@ export const initialState: TetrisModel = {
   powerOnCount: 0,
 
   score: 0,
-  speedLevel: 0,
+  speedLevel: 1,
 
   nextPieceShape: undefined,
   nextPieceDirection: undefined,
