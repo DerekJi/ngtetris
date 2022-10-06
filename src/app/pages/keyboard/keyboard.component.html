@@ -1,17 +1,14 @@
 <section>
-  <div class="row row-around">
-    <div class="ml">
-      <div>
-        <app-start-button></app-start-button>
-      </div>
-      <div class="space-t">
-        <app-sound-button class="mb"></app-sound-button>
-      </div>
-      <div class="space-t">
-        <app-reset-button></app-reset-button>
-      </div>
-      <div class="space-t">
+  <div class="row row-around row-align-baseline">
+    <div>
+      <div class="row">
         <app-power-button></app-power-button>
+        <app-reset-button></app-reset-button>
+        <app-sound-button></app-sound-button>
+      </div>
+      <div class="row row-between">
+        <app-start-button></app-start-button>
+        <app-movement-button action="DROP" [event]="Drop" size="small"></app-movement-button>
       </div>
     </div>
 
@@ -26,9 +23,6 @@
       </div>
       <div class="mt">
         <app-movement-button action="DOWN" [event]="Down">↓</app-movement-button>
-      </div>
-      <div class="">
-        <app-movement-button action="DROP" [event]="Drop">⤓</app-movement-button>
       </div>
     </div>
   </div>
