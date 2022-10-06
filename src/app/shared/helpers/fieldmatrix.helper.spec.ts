@@ -2,7 +2,7 @@ import { PieceDirection } from '../models/piece-direction.enum';
 import { PieceShape } from '../models/piece-shape.enum';
 import { PieceModel } from '../models/piece.model';
 import { Position } from '../models/position.model';
-import { getEmptyRow, isFullRow, mergeCurrentPiece, removeFullRows } from './fieldmatrix.helper';
+import { fieldHellper as helper } from './fieldmatrix.helper';
 
 describe('fieldmatrix.helper => mergeCurrentPiece()', () => {
   var _field: number[][] = [];
@@ -36,7 +36,7 @@ describe('fieldmatrix.helper => mergeCurrentPiece()', () => {
     ];
 
     // Act 1
-    var merged = mergeCurrentPiece(_field, piece);
+    var merged = helper.mergeCurrentPiece(_field, piece);
 
     // Assert 1
     verifyMerged(merged, expected);
@@ -49,7 +49,7 @@ describe('fieldmatrix.helper => mergeCurrentPiece()', () => {
     expected.push(new Position(3, 8));
 
     // Act 2
-    merged = mergeCurrentPiece(merged, piece);
+    merged = helper.mergeCurrentPiece(merged, piece);
 
     // Assert 2
     verifyMerged(merged, expected);
@@ -59,25 +59,25 @@ describe('fieldmatrix.helper => mergeCurrentPiece()', () => {
 describe('fieldmatrix.helper => isFullRow()', () => {
   it('should know it is a full row', () => {
     var row: number[] = [1, 1, 1, 1, 1, 1, 1];
-    var isFull = isFullRow(row);
+    var isFull = helper.isFullRow(row);
     expect(isFull).toBeTrue();
   });
 
   it('should know the row is not full', () => {
     var row: number[] = [0, 1, 1, 1, 1, 1, 1];
-    var isFull = isFullRow(row);
+    var isFull = helper.isFullRow(row);
     expect(isFull).toBeFalse();
   });
 
   it('should know the row is not full', () => {
     var row: number[] = [1, 1, 1, 1, 1, 1, 0];
-    var isFull = isFullRow(row);
+    var isFull = helper.isFullRow(row);
     expect(isFull).toBeFalse();
   });
 
   it('should know the row is not full', () => {
     var row: number[] = [1, 1, 0, 1, 1, 1, 1];
-    var isFull = isFullRow(row);
+    var isFull = helper.isFullRow(row);
     expect(isFull).toBeFalse();
   });
 });
@@ -94,7 +94,7 @@ describe('fieldmatrix.helper => removeFullLines()', () => {
     ];
 
     // Act
-    var updated = removeFullRows(field);
+    var updated = helper.removeFullRows(field);
 
     // Assert
     expect(updated.length).toBe(field.length);
@@ -117,7 +117,7 @@ describe('fieldmatrix.helper => removeFullLines()', () => {
     ];
 
     // Act
-    var updated = removeFullRows(field);
+    var updated = helper.removeFullRows(field);
 
     // Assert
     expect(updated.length).toBe(field.length);
@@ -140,7 +140,7 @@ describe('fieldmatrix.helper => removeFullLines()', () => {
     ];
 
     // Act
-    var updated = removeFullRows(field);
+    var updated = helper.removeFullRows(field);
 
     // Assert
     expect(updated.length).toBe(field.length);
@@ -154,10 +154,63 @@ describe('fieldmatrix.helper => removeFullLines()', () => {
 
 });
 
+describe('fieldmatrix.helper => countFullRows()', () => {
+  it('should count the number of full rows as 1', () => {
+    // Arrange
+    var field: number[][] = [
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 0, 1],
+      [1, 1, 1, 1, 1, 1, 1], // FULL
+    ];
+
+    // Act
+    var count = helper.countFullRows(field);
+
+    // Assert
+    expect(count).toBe(1);
+  });
+
+  it('should count the number of full rows (#3 & #4) as 2', () => {
+    // Arrange
+    var field: number[][] = [
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 1, 1], // FULL
+      [1, 1, 1, 1, 1, 1, 1], // FULL
+    ];
+
+    // Act
+    var count = helper.countFullRows(field);
+
+    // Assert
+    expect(count).toBe(2);
+  });
+
+  it('should count the number of full rows (#2 & #4) as 2', () => {
+    // Arrange
+    var field: number[][] = [
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1], // FULL
+      [1, 1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 1, 1], // FULL
+    ];
+
+    // Act
+    var count = helper.countFullRows(field);
+
+    // Assert
+    expect(count).toBe(2);
+  });
+});
+
 describe('fieldmatrix.helper => getEmptyRow()', () => {
   it('should create an array with all 0', () => {
     const size = 6;
-    var row = getEmptyRow(size);
+    var row = helper.getEmptyRow(size);
 
     expect(row.length).toBe(size);
     row.forEach((v) => expect(v).toBe(0));
@@ -165,7 +218,7 @@ describe('fieldmatrix.helper => getEmptyRow()', () => {
 
   it('should create an empty array with nagative value of size', () => {
     const size = -2;
-    var row = getEmptyRow(size);
+    var row = helper.getEmptyRow(size);
 
     expect(row.length).toBe(0);
   });

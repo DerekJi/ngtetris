@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, of, takeWhile, timer } from 'rxjs';
+import { of } from 'rxjs';
 import { Constants } from 'src/app/shared/consts';
-import { initField, setFieldOccupiedBy } from 'src/app/shared/helpers/fieldmatrix.helper';
-import { Position } from 'src/app/shared/models/position.model';
-import { SetReadyAction } from 'src/app/shared/store/tetris.actions';
+import { initialFieldMatrix } from 'src/app/shared/store/initial-field-matrix';
 import { PlayfieldComponent } from './playfield.component';
 
 @Component({
@@ -16,8 +14,7 @@ export class PlayfieldReadyComponent extends PlayfieldComponent {
   count = 0;
   readonly stopCount = 2 * Constants.PlayfieldHeight + 2;
 
-  override view$ = of(initField(Constants.PlayfieldWidth, Constants.PlayfieldHeight, 0));
+  override view$ = of(initialFieldMatrix);
 
-  constructor(store: Store) { super(store); }
-  
+  constructor(store: Store) { super(store); }  
 }

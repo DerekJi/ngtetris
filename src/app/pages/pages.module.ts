@@ -20,6 +20,7 @@ import { PowerButtonComponent } from './keyboard/button/power-button.component';
 import { PlayfieldStartingComponent } from './screen/playfield/playfield-starting.component';
 import { PlayfieldReadyComponent } from './screen/playfield/playfield-ready.component';
 import { FieldTopReadyComponent } from './screen/field-top-ready/field-top-ready.component';
+import { PlayfieldRemovingComponent } from './screen/playfield/playfield-removing.component';
 
 const buttons = [
   PowerButtonComponent,
@@ -32,6 +33,7 @@ const buttons = [
 const playfields = [
   PlayfieldStartingComponent,
   PlayfieldReadyComponent,
+  PlayfieldRemovingComponent,
 ]
 
 @NgModule({

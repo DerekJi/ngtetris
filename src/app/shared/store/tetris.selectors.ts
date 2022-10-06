@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { canMoveDown } from "../helpers/collision-detection.helper";
-import { mergeCurrentPiece } from "../helpers/fieldmatrix.helper";
+import { fieldHellper } from "../helpers/fieldmatrix.helper";
 import { getPieceMatrix } from "../helpers/piece.helper";
 import { PieceModel } from "../models/piece.model";
+import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../models/tetris.model";
 
 export const selectRoot = createFeatureSelector<TetrisModel>('tetris');
@@ -36,7 +37,16 @@ export const selectCanMoveDown = createSelector(selectPlayfield, selectCurrentPi
   (field, currentPiece) => canMoveDown(field, currentPiece));
 
 export const selectFildeView = createSelector(selectPlayfield, selectCurrentPiece,
-  (field, piece) => mergeCurrentPiece(field, piece));
+  (field, piece) => fieldHellper.mergeCurrentPiece(field, piece));
 
 export const selectAudioContext = createSelector(selectRoot, (root) => root.audioContext);
 export const selectAudioBuffer = createSelector(selectRoot, (root) => root.audioBuffer);
+
+export const selectFullRowsCount = createSelector(selectPlayfield,
+  (field) => fieldHellper.countFullRows(field));
+
+export const selectShouldRemove = createSelector(selectFullRowsCount, selectStatus,
+  (has, status) => has && status === TetrisFsmState.GameStarted);
+
+export const selectGameRunning = createSelector(selectStatus, selectShouldRemove,
+  (status, should) => !should && (status === TetrisFsmState.GameStarted || status === TetrisFsmState.Paused));

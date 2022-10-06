@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { initField, setFieldOccupiedBy } from 'src/app/shared/helpers/fieldmatrix.helper';
+import { fieldHellper } from 'src/app/shared/helpers/fieldmatrix.helper';
 import { Position } from 'src/app/shared/models/position.model';
 import { initialState } from 'src/app/shared/store/initial-state';
 import { selectFildeView } from 'src/app/shared/store/tetris.selectors';
@@ -40,7 +40,7 @@ describe('PlayfieldComponent', () => {
   it('should be correct view', () => {
     // Arrange
     const height: number = 6, width = 9;
-    var field: number[][] = initField(width, height, 0);
+    var field: number[][] = fieldHellper.initialize(width, height, 0);
     /**
      * ◻◻◻◻◻◻◻◻◻◻
      * ◻◻◻◻▣◻◻◻◻◻
@@ -59,7 +59,7 @@ describe('PlayfieldComponent', () => {
       new Position(5, 5),
       new Position(7, 5),
     ];
-    setFieldOccupiedBy(field, occupied);
+    fieldHellper.setFieldOccupiedBy(field, occupied);
     mockStore.overrideSelector(selectFildeView, field);
 
     // Act & Assert

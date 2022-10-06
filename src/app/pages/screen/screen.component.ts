@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { map, mergeMap, of } from 'rxjs';
 import { TetrisFsmState } from 'src/app/shared/models/tetris-fsm-state.enum';
-import { selectStatus } from 'src/app/shared/store/tetris.selectors';
+import { selectFullRowsCount, selectGameRunning, selectShouldRemove, selectStatus } from 'src/app/shared/store/tetris.selectors';
 
 @Component({
   selector: 'app-screen',
@@ -18,13 +18,12 @@ export class ScreenComponent {
   );
   poweredOff$ = this.status$.pipe(
     map((status) => status === TetrisFsmState.PoweredOff),
-    );
+  );  
   ready$ = this.status$.pipe(
     map((status) => status === TetrisFsmState.Ready),
-  );
-  gameRunning$ = this.status$.pipe(
-    map((status) => status === TetrisFsmState.GameStarted || status === TetrisFsmState.Paused),
-  );
+    );
+  hasFullrows$ = this.store.select(selectShouldRemove);
+  gameRunning$ = this.store.select(selectGameRunning);
 
   constructor(private store: Store) { }
 }

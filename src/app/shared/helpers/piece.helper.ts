@@ -4,7 +4,7 @@ import { PieceDirection } from "../models/piece-direction.enum";
 import { PieceShape } from "../models/piece-shape.enum";
 import { TetrisModel } from "../models/tetris.model";
 import { PieceModel } from "../models/piece.model";
-import { getEmptyRow } from "./fieldmatrix.helper";
+import { fieldHellper } from "./fieldmatrix.helper";
 
 function getRandomInt(min: number, max: number): number {
   min = Math.ceil(min);
@@ -30,7 +30,7 @@ export function getPieceMatrix(shape?: PieceShape, direction?: PieceDirection): 
 
   var matrix: number[][] = [];
   for (let col = 0; col < 4; col++) {
-    var row = getEmptyRow(4);
+    var row = fieldHellper.getEmptyRow(4);
     matrix.push(row);
   }
   return matrix;

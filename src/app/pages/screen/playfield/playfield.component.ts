@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, tap, timer } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { Constants } from 'src/app/shared/consts';
 import { BlockStatusColor } from 'src/app/shared/models/block-status.enum';
-import { TickAction } from 'src/app/shared/store/tetris.actions';
 import { selectFildeView, selectStatus } from 'src/app/shared/store/tetris.selectors';
 
 @Component({
@@ -11,7 +10,7 @@ import { selectFildeView, selectStatus } from 'src/app/shared/store/tetris.selec
   templateUrl: './playfield.component.html',
   styleUrls: ['./playfield.component.scss']
 })
-export class PlayfieldComponent implements OnInit {
+export class PlayfieldComponent {
 
   width = Constants.PlayfieldWidth;
   height = Constants.PlayfieldHeight;
@@ -32,19 +31,6 @@ export class PlayfieldComponent implements OnInit {
   );
 
   constructor(protected store: Store) { }
-
-  ngOnInit(): void {
-    this.startTick();
-  }
-
-  startTick(): void {
-    timer(0, Constants.TickIntervalMS).pipe(
-      tap(() => {
-        this.store.dispatch(TickAction());
-      })
-    )
-    .subscribe();
-  }
 
   blockStatus(value: number): BlockStatusColor {
     if (value === 1) return BlockStatusColor.Covered;

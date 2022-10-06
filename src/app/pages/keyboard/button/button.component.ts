@@ -19,7 +19,6 @@ export class ButtonComponent {
   constructor() { }
 
   onClick(): void {
-    console.log(this.action);
   }
   
   onKeyDown(): void {
