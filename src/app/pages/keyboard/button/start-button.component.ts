@@ -11,7 +11,8 @@ import { ButtonComponent } from './button.component';
 export class StartButtonComponent extends ButtonComponent {
 
   @Input() override action: string = 'START/PAUSE';
-  @Input() override size: 'small' | 'normal' = 'small';
+  @Input() override size: 'small' | 'normal' = 'normal';
+  @Input() override button = 'btn-start';
 
   constructor(private store: Store) { super(); }
 

@@ -72,3 +72,14 @@ export function getPieceBottom(pieceMatrix: number[][]): number {
   }
   return -1;
 }
+
+export function getPieceTop(pieceMatrix: number[][]): number {
+  for (let row = 0; row < 4; row++) {
+    for (let col = 0; col < 4; col++) {
+      if (pieceMatrix[row][col] > 0) {
+        return row;
+      }
+    }    
+  }
+  return -1;
+}

@@ -12,6 +12,7 @@ export class SoundButtonComponent extends ButtonComponent {
 
   @Input() override action: string = 'SOUND';
   @Input() override size: 'small' | 'normal' = 'small';
+  @Input() override button = 'btn-sound';
 
   constructor(private store: Store) { super(); }
 

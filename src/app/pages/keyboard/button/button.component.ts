@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-button',
@@ -8,7 +9,9 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
 
   @Input() action: string = '';
-  @Input() size: 'small' | 'normal' = 'normal';
+  @Input() size: 'small' | 'normal' | 'long' = 'normal';
+  @Input() direction: '' | 'vertical' = '';
+  @Input() button = "";
 
   protected keyDown: boolean = false;
 

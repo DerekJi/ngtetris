@@ -47,10 +47,34 @@
 
 
 .small {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
+}
+
+.long {
+  width: 48px;
+  height: 24px;
+  border-radius: 25%;
+
+  .content {
+    padding-top: 0;
+  }
+
+  &:before,
+  &:after {
+    border-radius: 25%;
+  }
+}
+
+.vertical {
+  transform: rotate(90deg);
 }
 
 .btn-label {
   font-size: 0.7em;
 }
+
+.btn-power { background-color: #e44d13;}
+.btn-reset { background-color: #d41cdbcf; }
+.btn-start { background-color: #46e11dd4; }
+.btn-sound { background-color: #039ebb8a; }

@@ -8,21 +8,21 @@
       </div>
       <div class="row row-between">
         <app-start-button></app-start-button>
-        <app-movement-button action="DROP" [event]="Drop" size="small"></app-movement-button>
+        <app-movement-button action="DROP" [event]="Drop" size="normal"></app-movement-button>
       </div>
     </div>
-
+    
     <div>
       <div class="mb">
-        <app-movement-button action="ROTATE" [event]="RotateClockwise">↻</app-movement-button>
+        <app-movement-button [event]="RotateClockwise">↻</app-movement-button>
       </div>
       <div class="row row-around">
-        <app-movement-button action="LEFT" [event]="Left" class="mr">⤝</app-movement-button>
+        <app-movement-button [event]="Left" class="mr">⤝</app-movement-button>
         <div class="font-48">+</div>
-        <app-movement-button action="RIGHT" [event]="Right" class="ml">⤞</app-movement-button>
+        <app-movement-button [event]="Right" class="ml">⤞</app-movement-button>
       </div>
       <div class="mt">
-        <app-movement-button action="DOWN" [event]="Down">↓</app-movement-button>
+        <app-movement-button [event]="Down">⬇</app-movement-button>
       </div>
     </div>
   </div>

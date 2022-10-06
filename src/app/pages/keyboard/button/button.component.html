@@ -3,12 +3,12 @@
       (pointerdown)="onKeyDown()"
       (pointerup)="onKeyUp()" 
       (pointerleave)="onKeyUp()"
-    [ngClass]="[ keyDownClass, size ]"
+    [ngClass]="[ keyDownClass, size, button, direction ]"
     [title]="action"
   >
   <span class="content">
     <ng-content></ng-content>
   </span>
   </span>
-  <div class="btn-label">{{ action }}</div>
+  <div class="btn-label" *ngIf="action">{{ action }}</div>
 </div>

@@ -3,7 +3,8 @@ export const Constants = {
   MaxScoreLength: 6,
 
   TickIntervalMS: 1000,
-  StartingInterval: 10,
+  StartingInterval: 80,
+  GameOverDuration: 3500,
 
   PlayfieldWidth: 10,
   PlayfieldHeight: 20,

@@ -12,6 +12,7 @@ export class ResetButtonComponent extends ButtonComponent {
 
   @Input() override action: string = 'RESET';
   @Input() override size: 'small' | 'normal' = 'small';
+  @Input() override button = 'btn-reset';
 
   constructor(private store: Store) { super(); }
 
