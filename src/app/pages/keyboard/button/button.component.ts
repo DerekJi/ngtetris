@@ -12,6 +12,7 @@ export class ButtonComponent {
   @Input() size: 'small' | 'normal' | 'long' = 'normal';
   @Input() direction: '' | 'vertical' = '';
   @Input() button = "";
+  @Input() keyEvent: 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight' | ' ' | '' = '';
 
   protected keyDown: boolean = false;
 
@@ -24,11 +25,11 @@ export class ButtonComponent {
   onClick(): void {
   }
   
-  onKeyDown(): void {
+  onKeyDown(event?: KeyboardEvent): void {
     this.keyDown = true;
   }
 
-  onKeyUp(): void {
+  onKeyUp(event?: KeyboardEvent): void {
     this.keyDown = false;
   }
 }
