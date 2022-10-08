@@ -8,4 +8,7 @@ export const Constants = {
 
   PlayfieldWidth: 10,
   PlayfieldHeight: 20,
+
+  PieceShapesNumber: 7,
+  PieceDirectionNUmber: 4,
 };
