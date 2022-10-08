@@ -5,20 +5,27 @@ import { PieceShape } from "../models/piece-shape.enum";
 import { TetrisModel } from "../models/tetris.model";
 import { PieceModel } from "../models/piece.model";
 import { fieldHellper } from "./fieldmatrix.helper";
+import { Constants } from "../consts";
 
+/**
+ * Generate random value between min and max, saing, value ∈ [min, max]
+ * @param min minimum value, inclusive
+ * @param max maximum value, inclusive
+ * @returns 
+ */
 function getRandomInt(min: number, max: number): number {
   min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  max = Math.floor(max + 1);
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 export function randomPieceShape(): PieceShape {
-  var index = getRandomInt(1, 7);
+  var index = getRandomInt(1, Constants.PieceShapesNumber);
   return index as PieceShape;
 }
 
 export function randomPieceDirection(): PieceDirection {
-  var index = getRandomInt(0, 3);
+  var index = getRandomInt(0, Constants.PieceDirectionNUmber - 1);
   return index as PieceDirection;
 }
 
@@ -28,11 +35,7 @@ export function getPieceMatrix(shape?: PieceShape, direction?: PieceDirection): 
     return hexToMatrix(def?.value);
   }
 
-  var matrix: number[][] = [];
-  for (let col = 0; col < 4; col++) {
-    var row = fieldHellper.getEmptyRow(4);
-    matrix.push(row);
-  }
+  var matrix: number[][] = fieldHellper.initialize(4, 4, 0);
   return matrix;
 }
 
