@@ -14,6 +14,7 @@ export class MachineComponent implements OnInit {
   constructor(private audioHelper: HttpService, private store: Store) { }
 
   ngOnInit(): void {
+    this.store.dispatch(actions.LoadProgress());
     this.loadAudio();
     this.startTick();
   }

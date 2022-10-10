@@ -3,6 +3,7 @@ import { MovementEvent } from "../models/movement.enum";
 import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
 
 const PowerOn = createAction('[Tetris] Powered On');
+const LoadProgress = createAction('[Tetris] Powered On');
 const LoadAudio = createAction('[Tetris] Load Audio', props<{ context: AudioContext, buffer: AudioBuffer }>());
 const SetReady = createAction('[Tetris] Set Ready');
 const Reset = createAction('[Tetris] Reset');
@@ -16,6 +17,7 @@ const PlayClearSound = createAction('[Tetris] Play Clear Sound');
 
 export const actions = {
   PowerOn,
+  LoadProgress,
   LoadAudio,
   SetReady,
   Reset,
