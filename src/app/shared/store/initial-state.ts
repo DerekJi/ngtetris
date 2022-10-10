@@ -5,8 +5,6 @@ import { initialFieldMatrix } from "./initial-field-matrix";
 export const initialState: TetrisModel = {
   status: TetrisFsmState.Ready,
 
-  powerOnCount: 0,
-
   score: 0,
   speedLevel: 1,
 
