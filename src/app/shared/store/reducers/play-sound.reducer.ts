@@ -31,12 +31,11 @@ export function playStatusSoundReducer(state: TetrisModel, { status }: { status:
     if (source) {
       switch (state.status) {
         case TetrisFsmState.PoweredOn:
-          if (state.powerOnCount < 2) {
-            audio.playGameStart(source); 
-          }
+          audio.playGameStart(source); 
           break;
         case TetrisFsmState.GameOver:
-          audio.playGameOver(source); break;
+          audio.playGameOver(source); 
+          break;
       }
     }
   }

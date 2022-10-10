@@ -13,10 +13,13 @@ import { TetrisModel } from "../models/tetris.model";
 import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
 import { togglePowerOnOffReducer } from "./reducers/toggle-power-on-off.reducer";
 import { removeReducer } from "./reducers/remove.reducer";
+import { loadProgressReducer } from "./reducers/load-progress.reducer";
 
 export const tetrisReducer = createReducer(initialState,
 
   on(actions.PowerOn, togglePowerOnOffReducer),
+
+  on(actions.LoadProgress, loadProgressReducer),
 
   on(actions.PlayStatusSound, (state: TetrisModel): TetrisModel => playStatusSoundReducer(state, { status: TetrisFsmState.PoweredOn })),
 
