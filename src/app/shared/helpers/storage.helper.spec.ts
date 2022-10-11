@@ -41,7 +41,7 @@ describe("storage.helper", () => {
 
         // assert
         expect(stored !== null).toBeTrue();
-        expect(stored?.status).toBe(model.status);
+        expect(stored?.status).toBe(model.status);  
         expect(stored?.score).toBe(model.score);
         expect(stored?.soundsOn).toBe(model.soundsOn);
         expect(stored?.currentLeft).toBe(model.currentLeft);
@@ -50,5 +50,7 @@ describe("storage.helper", () => {
         expect(stored?.currentPieceDirection).toBe(model.currentPieceDirection);
         expect(stored?.nextPieceShape).toBe(model.nextPieceShape);
         expect(stored?.nextPieceDirection).toBe(model.nextPieceDirection);
+        expect(stored?.audioBuffer).toBeNull();
+        expect(stored?.audioContext).toBeUndefined();
     });
 });
