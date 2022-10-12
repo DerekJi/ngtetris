@@ -6,7 +6,7 @@ import { mergeMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class AudioService {
   public readonly context: AudioContext = new AudioContext();
   private readonly url: string = 'assets/music.mp3';
   private readonly responseType = 'arraybuffer';
@@ -14,7 +14,6 @@ export class HttpService {
   private buffer: AudioBuffer | null = null;
 
   constructor(private http: HttpClient) {
-    this.http.get('', { responseType: this.responseType });
   }
 
   loadAsync(): Observable<AudioBuffer> {
@@ -26,19 +25,15 @@ export class HttpService {
     .pipe(
       mergeMap((response) => {
         return this.context.decodeAudioData(response, 
-          (buf) => buf,
+          (buf) => { 
+            this.buffer = buf;
+            return buf;
+          },
           (error) => {
             console.error(error);
           });
       })
     );
     return buffer;
-  }
-
-  playSound(buffer: AudioBuffer, time: number) {
-    var source: AudioBufferSourceNode = this.context.createBufferSource();
-    source.buffer = buffer;
-    source.connect(this.context.destination);
-    source.start(time);
   }
 }

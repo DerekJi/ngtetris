@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HttpService } from './helpers/http.service';
+import { AudioService } from './helpers/audio.service';
 
 
 @NgModule({

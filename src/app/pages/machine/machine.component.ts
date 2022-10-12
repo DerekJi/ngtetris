@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { tap, timer } from 'rxjs';
 import { Constants } from 'src/app/shared/consts';
-import { HttpService } from 'src/app/shared/helpers/http.service';
+import { AudioService } from 'src/app/shared/helpers/audio.service';
 import { actions } from 'src/app/shared/store/tetris.actions';
 
 @Component({
@@ -11,7 +11,7 @@ import { actions } from 'src/app/shared/store/tetris.actions';
   styleUrls: ['./machine.component.scss']
 })
 export class MachineComponent implements OnInit {
-  constructor(private audioHelper: HttpService, private store: Store) { }
+  constructor(private audioService: AudioService, private store: Store) { }
 
   ngOnInit(): void {
     this.store.dispatch(actions.LoadProgress());
@@ -20,9 +20,9 @@ export class MachineComponent implements OnInit {
   }
 
   loadAudio(): void {
-    this.audioHelper.loadAsync().pipe(
+    this.audioService.loadAsync().pipe(
       tap((buffer) => {
-        this.store.dispatch(actions.LoadAudio({ buffer, context: this.audioHelper.context }));
+        this.store.dispatch(actions.LoadAudio({ buffer, context: this.audioService.context }));
       }),
     )
     .subscribe();
