@@ -23,7 +23,6 @@ export class MovementButtonComponent extends ButtonComponent {
 
   @HostListener("window:keydown", ['$event'])
   override onKeyDown(event?: KeyboardEvent) {
-    console.log(`Pressed ${event?.key}!`);
     if (event === null || event?.key.toString() === this.keyEvent) {
       super.onKeyDown(event);
       this.onClick();
@@ -32,7 +31,6 @@ export class MovementButtonComponent extends ButtonComponent {
 
   @HostListener("window:keyup", ['$event'])
   override onKeyUp(event?: KeyboardEvent) {
-    console.log(`Pressed ${event?.key}!`);
     if (event === null || event?.key.toString() === this.keyEvent) {
       super.onKeyUp(event);
     }
