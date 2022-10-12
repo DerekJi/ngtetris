@@ -1,11 +1,19 @@
 <section >
-  <ng-container *ngIf="view$ | async as view">
+  <ng-container *ngIf="view$ | async as view; else noView">
     <div class="pf-row" *ngFor="let row of view" [ngClass]="status$ | async">
       <ng-container *ngFor="let block of row">
         <app-block [status]="blockStatus(block)"></app-block>
       </ng-container>
     </div>
   </ng-container>
+
+  <ng-template #noView>
+    <div class="pf-row" *ngFor="let row of [].constructor(height)">
+      <ng-container *ngFor="let block of [].constructor(width)">
+        <app-block></app-block>
+      </ng-container>
+    </div>
+  </ng-template>
 
   <app-field-top-ready [ngClass]="ready$ | async"></app-field-top-ready>
   <app-field-top-gameover [ngClass]="gameover$ | async"></app-field-top-gameover>
