@@ -10,7 +10,7 @@ export function removeReducer(state: TetrisModel): TetrisModel {
     if (count > 0) {
       var updatedField = fieldHellper.removeFullRows(state.playfieldMatrix);
       return immutable.map(state, {
-        score: score.clear(state.score, count),
+        score: score.onRemovingFullRows(state.score, count),
         playfieldMatrix: updatedField
       });
     }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { AudioService } from 'src/app/shared/helpers/audio.service';
 import { AudioActions } from 'src/app/shared/store/audio.actions';
 
@@ -36,9 +36,9 @@ export class ButtonComponent {
     this.keyDown = false;
   }
   
-  loadAudio(): void {
+  loadAudio(): Subscription {
     var context = new AudioContext();
-    this.audioService.loadAsync(context).pipe(
+    return this.audioService.loadAsync(context).pipe(
       tap((buffer) => {
         this.store.dispatch(AudioActions.LoadAudio({ buffer, context }));
       }),

@@ -183,7 +183,7 @@ function reachedBottomReducer(state: TetrisModel): TetrisModel {
         currentPieceDirection: undefined,
         nextPieceShape: randomPieceShape(),
         nextPieceDirection: randomPieceDirection(),
-        score: score.toBottom(state.score),
+        score: score.onPieceToBottom(state.score),
       });   
     }
   }
@@ -198,6 +198,6 @@ function reachedBottomReducer(state: TetrisModel): TetrisModel {
     currentPieceDirection: state.nextPieceDirection,
     nextPieceShape: randomPieceShape(),
     nextPieceDirection: randomPieceDirection(),
-    score: score.toBottom(state.score),
+    score: score.onPieceToBottom(state.score),
   });   
 }

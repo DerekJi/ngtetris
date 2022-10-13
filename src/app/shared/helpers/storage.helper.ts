@@ -2,7 +2,6 @@ import { TetrisModel } from "../models/tetris.model";
 
 const storage = localStorage;
 const storageKey: string = 'tetris';
-const key = (word: string): string => `${storageKey}.${word}`;
 
 function save(state?: TetrisModel): void {
     if (!state) return;
