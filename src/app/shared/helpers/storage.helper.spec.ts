@@ -2,14 +2,14 @@ import { PieceDirection } from "../models/piece-direction.enum";
 import { PieceShape } from "../models/piece-shape.enum";
 import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../models/tetris.model";
-import { initialState } from "../store/initial-state";
+import { initialTetrisState } from "../store/initial-state";
 import { tetrisStorage } from "./storage.helper";
 
 describe("storage.helper", () => {
     let model: TetrisModel;
 
     beforeEach(() => {
-        model = {...initialState};
+        model = {...initialTetrisState};
         tetrisStorage.clear();
     });
 

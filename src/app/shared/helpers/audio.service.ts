@@ -7,7 +7,6 @@ import { mergeMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AudioService {
-  public readonly context: AudioContext = new AudioContext();
   private readonly url: string = 'assets/music.mp3';
   private readonly responseType = 'arraybuffer';
 
@@ -16,7 +15,7 @@ export class AudioService {
   constructor(private http: HttpClient) {
   }
 
-  loadAsync(): Observable<AudioBuffer> {
+  loadAsync(context: AudioContext): Observable<AudioBuffer> {
     if (this.buffer != null && this.buffer.length > 0) {
       return of(this.buffer);
     }
@@ -24,7 +23,7 @@ export class AudioService {
     var buffer = this.http.get(this.url, { responseType: this.responseType })
     .pipe(
       mergeMap((response) => {
-        return this.context.decodeAudioData(response, 
+        return context.decodeAudioData(response, 
           (buf) => { 
             this.buffer = buf;
             return buf;

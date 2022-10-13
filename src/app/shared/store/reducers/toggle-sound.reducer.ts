@@ -1,7 +1,7 @@
 import { immutable } from "../../helpers/immutable.helper";
-import { TetrisModel } from "../../models/tetris.model";
+import { AudioModel } from "../../models/audio.model";
 
-export function toggleSoundReducer(state: TetrisModel): TetrisModel {
+export function toggleSoundReducer(state: AudioModel): AudioModel {
   return immutable.map(state, {
     soundsOn: !state.soundsOn
   });

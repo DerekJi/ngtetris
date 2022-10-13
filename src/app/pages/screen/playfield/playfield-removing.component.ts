@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable, take, timer } from 'rxjs';
 import { fieldHellper } from 'src/app/shared/helpers/fieldmatrix.helper';
-import { actions } from 'src/app/shared/store/tetris.actions';
+import { AudioActions } from 'src/app/shared/store/audio.actions';
+import { TetrisActions } from 'src/app/shared/store/tetris.actions';
 import { selectFildeView } from 'src/app/shared/store/tetris.selectors';
 import { PlayfieldComponent } from './playfield.component';
 
@@ -25,7 +26,7 @@ export class PlayfieldRemovingComponent extends PlayfieldComponent implements On
   }
 
   removeFullRows(): Observable<number[][]> {
-    this.store.dispatch(actions.PlayClearSound());
+    this.store.dispatch(AudioActions.PlayClearSound());
 
     var count = 0;
     var stop = 7;    
@@ -46,7 +47,7 @@ export class PlayfieldRemovingComponent extends PlayfieldComponent implements On
         
         count++;
         if (count === stop) {
-          this.store.dispatch(actions.RemoveFullRows());
+          this.store.dispatch(TetrisActions.RemoveFullRows());
         }
         return view;
       })

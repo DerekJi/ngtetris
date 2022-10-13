@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, mergeMap, of } from 'rxjs';
+import { map } from 'rxjs';
 import { TetrisFsmState } from 'src/app/shared/models/tetris-fsm-state.enum';
-import { selectFullRowsCount, selectGameRunning, selectShouldRemove, selectStatus } from 'src/app/shared/store/tetris.selectors';
+import { selectGameRunning, selectShouldRemove, selectStatus } from 'src/app/shared/store/tetris.selectors';
 
 @Component({
   selector: 'app-screen',

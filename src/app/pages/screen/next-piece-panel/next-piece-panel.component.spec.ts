@@ -4,7 +4,7 @@ import { getPieceMatrix } from 'src/app/shared/helpers/piece.helper';
 import { BlockStatusColor } from 'src/app/shared/models/block-status.enum';
 import { PieceDirection } from 'src/app/shared/models/piece-direction.enum';
 import { PieceShape } from 'src/app/shared/models/piece-shape.enum';
-import { initialState } from 'src/app/shared/store/initial-state';
+import { initialTetrisState } from 'src/app/shared/store/initial-state';
 import { selectNextPieceMatrix } from 'src/app/shared/store/tetris.selectors';
 import { NextPiecePanelComponent } from './next-piece-panel.component';
 
@@ -17,7 +17,7 @@ describe('NextPiecePanelComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ NextPiecePanelComponent ],
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({ initialState: initialTetrisState }),
       ],
     })
     .compileComponents();

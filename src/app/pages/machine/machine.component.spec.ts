@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { initialState } from 'src/app/shared/store/initial-state';
+import { initialTetrisState } from 'src/app/shared/store/initial-state';
 
 import { MachineComponent } from './machine.component';
 
@@ -17,7 +17,7 @@ describe('MachineComponent', () => {
         HttpClientModule,
       ],
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({ initialState: initialTetrisState }),
       ]
     })
     .compileComponents();

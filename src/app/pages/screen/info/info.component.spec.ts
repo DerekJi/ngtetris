@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { initialState } from 'src/app/shared/store/initial-state';
+import { initialTetrisState } from 'src/app/shared/store/initial-state';
 import { selectScore, selectSpeedLevel } from 'src/app/shared/store/tetris.selectors';
 
 import { InfoComponent } from './info.component';
@@ -14,7 +14,7 @@ describe('InfoComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ InfoComponent ],
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({ initialState: initialTetrisState }),
       ],
     })
     .compileComponents();

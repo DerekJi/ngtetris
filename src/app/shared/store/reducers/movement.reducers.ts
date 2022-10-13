@@ -9,7 +9,7 @@ import { MovementEvent } from "../../models/movement.enum";
 import { PieceModel } from "../../models/piece.model";
 import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../../models/tetris.model";
-import { initialState } from "../initial-state";
+import { initialTetrisState } from "../initial-state";
 
 export function movementReducer(state: TetrisModel, { movement }: { movement: MovementEvent}): TetrisModel {
   switch (movement) {
@@ -178,7 +178,7 @@ function reachedBottomReducer(state: TetrisModel): TetrisModel {
         status: TetrisFsmState.GameOver,
         playfieldMatrix: field,
         currentTop: 0,
-        currentLeft: initialState.currentLeft,
+        currentLeft: initialTetrisState.currentLeft,
         currentPieceShape: undefined,
         currentPieceDirection: undefined,
         nextPieceShape: randomPieceShape(),
@@ -193,7 +193,7 @@ function reachedBottomReducer(state: TetrisModel): TetrisModel {
   return immutable.map(state, {
     playfieldMatrix: field,
     currentTop: initialPieceTop,
-    currentLeft: initialState.currentLeft,
+    currentLeft: initialTetrisState.currentLeft,
     currentPieceShape: state.nextPieceShape,
     currentPieceDirection: state.nextPieceDirection,
     nextPieceShape: randomPieceShape(),

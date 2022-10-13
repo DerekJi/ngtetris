@@ -1,24 +1,16 @@
-import { audio } from "../../helpers/audio.helper";
 import { immutable } from "../../helpers/immutable.helper";
 import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../../models/tetris.model";
-import { initialState } from "../initial-state";
+import { initialTetrisState } from "../initial-state";
 
-export function togglePowerOnOffReducer(state: TetrisModel): TetrisModel {
-  if (TetrisFsmState.PoweredOff === state.status)
-  {
-    var source = audio.getSource(state);
-    if (source) {
-      audio.playGameStart(source);
-    }
-    return immutable.map(state, {
-      status: TetrisFsmState.PoweredOn,
-    });
-  } 
+export function powerOnReducer(state: TetrisModel): TetrisModel {
+  return setStatusReducer(initialTetrisState, { status: TetrisFsmState.PoweredOn });
+}
 
-  return immutable.map(initialState, {
-    status: TetrisFsmState.PoweredOff,
-    audioBuffer: state.audioBuffer,
-    audioContext: state.audioContext,
-  });
+export function powerOffReducer(state: TetrisModel): TetrisModel {
+  return setStatusReducer(initialTetrisState, { status: TetrisFsmState.PoweredOff });
+}
+
+function setStatusReducer(state: TetrisModel, { status }: {status: TetrisFsmState}): TetrisModel {
+  return immutable.map(state, { status });
 }

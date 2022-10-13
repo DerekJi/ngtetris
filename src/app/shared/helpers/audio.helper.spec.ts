@@ -1,5 +1,5 @@
 import { TetrisModel } from "../models/tetris.model";
-import { initialState } from "../store/initial-state";
+import { initialTetrisState } from "../store/initial-state";
 import { audio } from "./audio.helper";
 
 describe('AudioHelper', () => {
@@ -10,7 +10,7 @@ describe('AudioHelper', () => {
   };
 
   beforeEach(() => {
-    state = {...initialState};
+    state = {...initialTetrisState};
     state.audioBuffer = new AudioBuffer(options);
     state.audioContext = new AudioContext();
   });

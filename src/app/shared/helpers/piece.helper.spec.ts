@@ -1,7 +1,7 @@
 import { Constants } from '../consts';
 import { PieceDirection } from '../models/piece-direction.enum';
 import { PieceShape } from '../models/piece-shape.enum';
-import { initialState } from '../store/initial-state';
+import { initialTetrisState } from '../store/initial-state';
 import { immutable } from './immutable.helper';
 import { getCurrentPiece, getPieceBottom, getPieceLeft, getPieceMatrix, getPieceRight, getPieceTop, randomPieceDirection, randomPieceShape } from './piece.helper';
 
@@ -79,7 +79,7 @@ describe('piecematrix.helper', () => {
 
   it('getCurrentPiece() should build correct model', () => {
     // Arrange
-    var state = immutable.map(initialState, {
+    var state = immutable.map(initialTetrisState, {
       currentLeft: 3,
       currentTop: 13,
       currentPieceShape: PieceShape.S,

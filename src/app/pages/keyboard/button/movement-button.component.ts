@@ -1,7 +1,6 @@
 import { Component, HostListener, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { MovementEvent } from 'src/app/shared/models/movement.enum';
-import { actions } from 'src/app/shared/store/tetris.actions';
+import { TetrisActions } from 'src/app/shared/store/tetris.actions';
 import { ButtonComponent } from './button.component';
 
 @Component({
@@ -15,10 +14,8 @@ export class MovementButtonComponent extends ButtonComponent {
   @Input() override action: string = '';
   @Input() override size: 'small' | 'normal' | 'long' = 'normal';
 
-  constructor(private store: Store) { super(); }
-
   override onClick(): void {
-    this.store.dispatch(actions.Movement({ movement: this.event }));
+    this.store.dispatch(TetrisActions.Movement({ movement: this.event }));
   }
 
   @HostListener("window:keydown", ['$event'])

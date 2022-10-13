@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { initialState } from 'src/app/shared/store/initial-state';
+import { initialTetrisState } from 'src/app/shared/store/initial-state';
 import { selectSoundsOn } from 'src/app/shared/store/tetris.selectors';
 
 import { SoundIndicatorComponent } from './sound-indicator.component';
@@ -14,7 +14,7 @@ describe('SoundIndicatorComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ SoundIndicatorComponent ],
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({ initialState: initialTetrisState }),
       ],
     })
     .compileComponents();

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { initialState } from 'src/app/shared/store/initial-state';
+import { initialTetrisState } from 'src/app/shared/store/initial-state';
 
 import { ScreenComponent } from './screen.component';
 
@@ -13,7 +13,7 @@ describe('ScreenComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ScreenComponent ],      
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({ initialState: initialTetrisState }),
       ]
     })
     .compileComponents();
