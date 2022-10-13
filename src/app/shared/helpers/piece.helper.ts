@@ -30,7 +30,7 @@ export function randomPieceDirection(): PieceDirection {
 }
 
 export function getPieceMatrix(shape?: PieceShape, direction?: PieceDirection): number[][] {
-  if (shape !== undefined && direction !== undefined) {
+  if (shape !== undefined && direction !== undefined && shape !== PieceShape.NULL) {
     var def = ShapeMatrixDefinitions.find(x => x.shape === shape && x.direction === direction);
     return hexToMatrix(def?.value);
   }

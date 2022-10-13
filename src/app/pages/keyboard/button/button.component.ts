@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Subscription, tap } from 'rxjs';
+import { AudioService } from 'src/app/shared/helpers/audio.service';
+import { AudioActions } from 'src/app/shared/store/audio.actions';
 
 @Component({
   selector: 'app-button',
@@ -20,7 +23,7 @@ export class ButtonComponent {
     return this.keyDown ? 'btn-down' : '';
   }
 
-  constructor() { }
+  constructor(protected audioService: AudioService, protected store: Store) { }
 
   onClick(): void {
   }
@@ -31,5 +34,15 @@ export class ButtonComponent {
 
   onKeyUp(event?: KeyboardEvent): void {
     this.keyDown = false;
+  }
+  
+  loadAudio(): Subscription {
+    var context = new AudioContext();
+    return this.audioService.loadAsync(context).pipe(
+      tap((buffer) => {
+        this.store.dispatch(AudioActions.LoadAudio({ buffer, context }));
+      }),
+    )
+    .subscribe();
   }
 }

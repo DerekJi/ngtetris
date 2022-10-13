@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { selectSoundsOn } from 'src/app/shared/store/tetris.selectors';
+import { selectSoundsOn } from 'src/app/shared/store/audio.selectors';
 
 @Component({
   selector: 'app-sound-indicator',

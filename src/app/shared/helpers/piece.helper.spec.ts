@@ -1,12 +1,13 @@
 import { Constants } from '../consts';
 import { PieceDirection } from '../models/piece-direction.enum';
 import { PieceShape } from '../models/piece-shape.enum';
-import { initialState } from '../store/initial-state';
+import { initialTetrisState } from '../store/initial-state';
+import { fieldHellper } from './fieldmatrix.helper';
 import { immutable } from './immutable.helper';
 import { getCurrentPiece, getPieceBottom, getPieceLeft, getPieceMatrix, getPieceRight, getPieceTop, randomPieceDirection, randomPieceShape } from './piece.helper';
 
 describe('piecematrix.helper', () => {
-  function verify(shape: PieceShape, direction: PieceDirection, 
+  function verify(shape: PieceShape | undefined, direction: PieceDirection | undefined, 
                   expectedLeft: number,
                   expectedRight: number,
                   expectedBottom: number,
@@ -33,6 +34,10 @@ describe('piecematrix.helper', () => {
     verify(PieceShape.T, PieceDirection.LEFT, 0, 1, 2, 0);
     verify(PieceShape.T, PieceDirection.UP, 0, 2, 1, 0);
     verify(PieceShape.J, PieceDirection.UP, 0, 1, 2, 0);
+    verify(PieceShape.NULL, PieceDirection.UP, -1, -1, -1, -1);
+    verify(undefined, PieceDirection.UP, -1, -1, -1, -1);
+    verify(PieceShape.J, undefined, -1, -1, -1, -1);
+    verify(undefined, undefined, -1, -1, -1, -1);
   });
 
   it('randomPieceShape() should generate all possible piece shapes within 100 times', () => {
@@ -63,6 +68,39 @@ describe('piecematrix.helper', () => {
     expect(directions.length).toBe(Constants.PieceDirectionNUmber);
   });
 
+  it('getPieceMatrix() should return an empty 4x4 matrix, since no shape', () => {
+    var matrix = getPieceMatrix(undefined, PieceDirection.DOWN);
+    expect(matrix.length).toBe(4);
+    expect(matrix[0].length).toBe(4);
+    for (let row of matrix) {
+      for (let ele of row) {
+        expect(ele).toBe(0);
+      }
+    }
+  });
+
+  it('getPieceMatrix() should return an empty 4x4 matrix, since no direction', () => {
+    var matrix = getPieceMatrix(PieceShape.L, undefined);
+    expect(matrix.length).toBe(4);
+    expect(matrix[0].length).toBe(4);
+    for (let row of matrix) {
+      for (let ele of row) {
+        expect(ele).toBe(0);
+      }
+    }
+  });
+
+  it('getPieceMatrix() should return an empty 4x4 matrix, since shape is NULL', () => {
+    var matrix = getPieceMatrix(PieceShape.NULL, PieceDirection.DOWN);
+    expect(matrix.length).toBe(4);
+    expect(matrix[0].length).toBe(4);
+    for (let row of matrix) {
+      for (let ele of row) {
+        expect(ele).toBe(0);
+      }
+    }
+  });
+
   it('getPieceMatrix() should return T.Up matrix', () => {
     // Act
     var matrix = getPieceMatrix(PieceShape.T, PieceDirection.UP);
@@ -79,7 +117,7 @@ describe('piecematrix.helper', () => {
 
   it('getCurrentPiece() should build correct model', () => {
     // Arrange
-    var state = immutable.map(initialState, {
+    var state = immutable.map(initialTetrisState, {
       currentLeft: 3,
       currentTop: 13,
       currentPieceShape: PieceShape.S,

@@ -1,11 +1,11 @@
-import { TetrisModel } from "../../models/tetris.model";
+import { AudioModel } from "../../models/audio.model";
 
-export function loadAudioReducer(state: TetrisModel, { context, buffer }: { context: AudioContext, buffer: AudioBuffer }): TetrisModel {
+export function loadAudioReducer(state: AudioModel, { context, buffer }: { context: AudioContext, buffer: AudioBuffer }): AudioModel {
   if (state.audioBuffer != null && state.audioBuffer.length > 0) {
     return { ...state };
   }
 
-  var props: Partial<TetrisModel> = {
+  var props: Partial<AudioModel> = {
     audioBuffer: buffer,
     audioContext: context,
   };

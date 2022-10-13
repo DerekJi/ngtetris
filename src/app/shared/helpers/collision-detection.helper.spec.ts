@@ -3,7 +3,7 @@ import { PieceDirection } from "../models/piece-direction.enum";
 import { PieceShape } from "../models/piece-shape.enum";
 import { PieceModel } from "../models/piece.model";
 import { Position } from "../models/position.model";
-import { collided } from "./collision-detection.helper";
+import { canMoveDown, collided } from "./collision-detection.helper";
 import { fieldHellper } from "./fieldmatrix.helper";
 
 describe('collision-detection.helper => collided', () => {
@@ -60,7 +60,24 @@ describe('collision-detection.helper => collided', () => {
    * ◻◻◻◻◻◻◻◻◻◻
    * ◻◻◻◻◻◻◻◻◻◻
    */
-  it('should return true as t.UP() collids occupied blocks', () => {
+  it('canMoveDown() should return true, as T.UP is still in the air', () => {
+    // Arrange
+    var piece: PieceModel = new PieceModel(5, 1, PieceShape.T, PieceDirection.UP);
+    // Act
+    var can = canMoveDown(field, piece);
+    // Assert
+    expect(can).toBeTrue();
+  })
+
+  /**
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻◻◻◻◻▣◻◻◻
+   * ◻◻◻◻◻▣▣▣◻◻
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻◻◻◻◻◻◻◻◻
+   */
+  it('collided() should return true as t.UP() collids occupied blocks', () => {
     // Arrange
     predefineOccupied();
     var piece: PieceModel = new PieceModel(5, 1, PieceShape.T, PieceDirection.UP);
@@ -78,7 +95,24 @@ describe('collision-detection.helper => collided', () => {
    * ◻◻▣▣◻◻◻◻◻◻
    * ◻◻▣◻◻◻◻◻◻◻
    */
-   it('should return true as t.RIGHT() collids occupied blocks', () => {
+   it('canMoveDown() should return false as t.RIGHT() reached bottom', () => {
+    // Arrange
+    var piece: PieceModel = new PieceModel(2, 3, PieceShape.T, PieceDirection.RIGHT);
+    // Act
+    var can = canMoveDown(field, piece);
+    // Assert
+    expect(can).toBeFalse();
+  });
+
+  /**
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻▣◻◻◻◻◻◻◻
+   * ◻◻▣▣◻◻◻◻◻◻
+   * ◻◻▣◻◻◻◻◻◻◻
+   */
+   it('collided() should return true as t.RIGHT() collids occupied blocks', () => {
     // Arrange
     predefineOccupied();
     var piece: PieceModel = new PieceModel(2, 3, PieceShape.T, PieceDirection.RIGHT);
@@ -88,6 +122,22 @@ describe('collision-detection.helper => collided', () => {
     expect(collisionsDetected).toBeTrue();
   });
 
+  /**
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻◻◻◻◻◻◻◻◻
+   * ◻◻▣◻◻◻◻◻◻◻
+   * ◻▣▣◻◻◻◻◻◻◻
+   * ◻◻▣◻◻◻◻◻◻◻
+   */
+   it('canMoveDown() should return false as t.LEFT() reached bottom', () => {
+    // Arrange
+    var piece: PieceModel = new PieceModel(1, 3, PieceShape.T, PieceDirection.LEFT);
+    // Act
+    var can = canMoveDown(field, piece);
+    // Assert
+    expect(can).toBeFalse();
+  });
     
   /**
    * ◻◻◻◻◻◻◻◻◻◻
@@ -97,7 +147,7 @@ describe('collision-detection.helper => collided', () => {
    * ◻▣▣◻◻◻◻◻◻◻
    * ◻◻▣◻◻◻◻◻◻◻
    */
-   it('should return false as t.LEFT() has no collisions', () => {
+   it('collided() should return false as t.LEFT() has no collisions', () => {
     // Arrange
     predefineOccupied();
     var piece: PieceModel = new PieceModel(1, 3, PieceShape.T, PieceDirection.LEFT);
@@ -115,7 +165,7 @@ describe('collision-detection.helper => collided', () => {
    * ◻◻◻◻◻◻◻◻◻◻
    * ◻◻◻◻◻◻◻◻◻◻
    */
-   it('should return false as t.UP() has no collisions', () => {
+   it('collided() should return false as t.UP() has no collisions', () => {
     // Arrange
     predefineOccupied();
     var piece: PieceModel = new PieceModel(5, 2, PieceShape.T, PieceDirection.UP);
@@ -133,7 +183,7 @@ describe('collision-detection.helper => collided', () => {
    * ◻◻◻◻◻◻◻▣◻◻
    * ◻◻◻◻◻◻◻◻◻◻
    */
-   it('should return false as t.RIGHT() has no collisions', () => {
+   it('collided() should return false as t.RIGHT() has no collisions', () => {
     // Arrange
     predefineOccupied();
     var piece: PieceModel = new PieceModel(7, 2, PieceShape.T, PieceDirection.RIGHT);
@@ -143,7 +193,7 @@ describe('collision-detection.helper => collided', () => {
     expect(collisionsDetected).toBeFalse();
   });
 
-  it('should return true as pieces collided to the right side', () => {
+  it('collided() should return true as pieces collided to the right side', () => {
     // Arrange
     zRight.left = 8;
     
@@ -154,7 +204,7 @@ describe('collision-detection.helper => collided', () => {
     }
   });
   
-  it('should return true as pieces collided to the left side', () => {
+  it('collided() should return true as pieces collided to the left side', () => {
     // Act & Assert
     for (let piece of [tUp, zUp, iRight]) {
       piece.left = -1;
@@ -163,7 +213,7 @@ describe('collision-detection.helper => collided', () => {
     }
   });
   
-  it('should return false as no collisions expected', () => {
+  it('collided() should return false as no collisions expected', () => {
     // Act & Assert
     for (let piece of [tUp, tRight, zUp, zRight, iUp]) {
       piece.left--;
@@ -172,7 +222,7 @@ describe('collision-detection.helper => collided', () => {
     }
   });  
   
-  it('should return true as pieces collided to the bottom', () => {
+  it('collided() should return true as pieces collided to the bottom', () => {
     // Arrange
     iUp.top = fieldHight - 3;
     tRight.top = fieldHight - 2;

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { fieldHellper } from 'src/app/shared/helpers/fieldmatrix.helper';
 import { Position } from 'src/app/shared/models/position.model';
-import { initialState } from 'src/app/shared/store/initial-state';
+import { initialTetrisState } from 'src/app/shared/store/initial-state';
 import { selectFildeView } from 'src/app/shared/store/tetris.selectors';
 
 import { PlayfieldComponent } from './playfield.component';
@@ -22,7 +22,7 @@ describe('PlayfieldComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ PlayfieldComponent ],
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({ initialState: initialTetrisState }),
       ],
     })
     .compileComponents();

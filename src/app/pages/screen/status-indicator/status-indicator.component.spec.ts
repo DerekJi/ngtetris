@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TetrisFsmState } from 'src/app/shared/models/tetris-fsm-state.enum';
-import { initialState } from 'src/app/shared/store/initial-state';
+import { initialTetrisState } from 'src/app/shared/store/initial-state';
 import { selectStatus } from 'src/app/shared/store/tetris.selectors';
 
 import { StatusIndicatorComponent } from './status-indicator.component';
@@ -15,7 +15,7 @@ describe('StatusIndicatorComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ StatusIndicatorComponent ],
       providers: [
-        provideMockStore({ initialState }),
+        provideMockStore({ initialState: initialTetrisState }),
       ],
     })
     .compileComponents();

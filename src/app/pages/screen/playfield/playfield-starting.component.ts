@@ -4,7 +4,7 @@ import { map, timer, take } from 'rxjs';
 import { Constants } from 'src/app/shared/consts';
 import { fieldHellper } from 'src/app/shared/helpers/fieldmatrix.helper';
 import { Position } from 'src/app/shared/models/position.model';
-import { actions } from 'src/app/shared/store/tetris.actions';
+import { TetrisActions } from 'src/app/shared/store/tetris.actions';
 import { PlayfieldComponent } from './playfield.component';
 
 @Component({
@@ -39,7 +39,7 @@ export class PlayfieldStartingComponent extends PlayfieldComponent {
       }
 
       if (this.count === this.stopCount - 1) {
-        this.store.dispatch(actions.SetReady());
+        this.store.dispatch(TetrisActions.SetReady());
       }
 
       this.count++;

@@ -21,7 +21,7 @@ describe('AudioService', () => {
     httpClientSpy.get.and.returnValue(of(httpResponse));
 
     // act & assert
-    service.loadAsync().pipe(
+    service.loadAsync(new AudioContext()).pipe(
       catchError((err) => of(null))
     )
     .subscribe((buf) => {

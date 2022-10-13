@@ -1,11 +1,11 @@
 import { AudioClip, music } from "../models/audio-clip.model";
-import { TetrisModel } from "../models/tetris.model";
+import { AudioModel } from "../models/audio.model";
 
 function play(source: AudioBufferSourceNode, clip: AudioClip) {
   source.start(0, clip.offset, clip.duration);
 }
 
-function getSource(state: TetrisModel): AudioBufferSourceNode | null {
+function getSource(state: AudioModel): AudioBufferSourceNode | null {
   var source: AudioBufferSourceNode | null = null;
   if (state.soundsOn && state.audioContext && state.audioBuffer) {
     source = state.audioContext.createBufferSource();

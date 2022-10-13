@@ -8,6 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { tetrisReducer } from './shared/store/tetris.reducers';
 import { HttpClientModule } from '@angular/common/http';
+import { audioReducer } from './shared/store/audio.reducers';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     PagesModule,
-    StoreModule.forRoot({ tetris: tetrisReducer }),
+    StoreModule.forRoot({ tetris: tetrisReducer, audio: audioReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { actions } from 'src/app/shared/store/tetris.actions';
+import { AudioActions } from 'src/app/shared/store/audio.actions';
 import { ButtonComponent } from './button.component';
 
 @Component({
@@ -14,9 +13,7 @@ export class SoundButtonComponent extends ButtonComponent {
   @Input() override size: 'small' | 'normal' = 'small';
   @Input() override button = 'btn-sound';
 
-  constructor(private store: Store) { super(); }
-
   override onClick(): void {
-    this.store.dispatch(actions.ToggleSound());
+    this.store.dispatch(AudioActions.ToggleSound());
   }
 }

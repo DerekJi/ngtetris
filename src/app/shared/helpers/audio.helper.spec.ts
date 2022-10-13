@@ -1,16 +1,16 @@
-import { TetrisModel } from "../models/tetris.model";
-import { initialState } from "../store/initial-state";
+import { AudioModel } from "../models/audio.model";
+import { initialAudioState, initialTetrisState } from "../store/initial-state";
 import { audio } from "./audio.helper";
 
 describe('AudioHelper', () => {
-  let state: TetrisModel;
+  let state: AudioModel;
   let options: AudioBufferOptions = {
     length: 1,
     sampleRate: 3600
   };
 
   beforeEach(() => {
-    state = {...initialState};
+    state = {...initialAudioState};
     state.audioBuffer = new AudioBuffer(options);
     state.audioContext = new AudioContext();
   });

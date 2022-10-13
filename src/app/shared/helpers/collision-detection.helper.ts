@@ -1,5 +1,5 @@
 import { PieceModel } from "../models/piece.model";
-import { getMoveDownModel, getMoveLeftModel, getMoveRightModel, getRotateAntiClockwiseModel, getRotateClockwiseModel } from "./moves.helper";
+import { getMoveDownModel } from "./moves.helper";
 import { getPieceMatrix } from "./piece.helper";
 
 export function canMoveDown(field: number[][], currentPiece: PieceModel): boolean {

@@ -1,12 +1,13 @@
 import { audio } from "../../helpers/audio.helper";
+import { immutable } from "../../helpers/immutable.helper";
+import { AudioModel } from "../../models/audio.model";
 import { MovementEvent } from "../../models/movement.enum";
 import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
-import { TetrisModel } from "../../models/tetris.model";
+import { initialAudioState } from "../initial-state";
 
-export function playMovementSoundReducer(state: TetrisModel, { movement }: { movement: MovementEvent}): TetrisModel {
-  if (state.soundsOn === true && [TetrisFsmState.GameStarted].includes(state.status))
-  {
-    var source = audio.getSource(state);
+export function playMovementSoundReducer(state: AudioModel, { movement }: { movement: MovementEvent}): AudioModel {
+  var source = audio.getSource(state);
+  if (state.soundsOn === true) {
     if (source) {
       switch (movement) {
         case MovementEvent.Down:
@@ -25,11 +26,11 @@ export function playMovementSoundReducer(state: TetrisModel, { movement }: { mov
   return {...state};
 }
 
-export function playStatusSoundReducer(state: TetrisModel, { status }: { status: TetrisFsmState }): TetrisModel {
+export function playStatusSoundReducer(state: AudioModel, { status }: { status: TetrisFsmState }): AudioModel {
+  var source = audio.getSource(state);
   if (state.soundsOn === true) {
-    var source = audio.getSource(state);
     if (source) {
-      switch (state.status) {
+      switch (status) {
         case TetrisFsmState.PoweredOn:
           audio.playGameStart(source); 
           break;
@@ -40,16 +41,28 @@ export function playStatusSoundReducer(state: TetrisModel, { status }: { status:
     }
   }
 
-  return {...state};
+  return immutable.map(state, { source });
 }
 
-export function playClearSoundReducer(state: TetrisModel): TetrisModel {
+export function playGameStartReducer(state: AudioModel) : AudioModel {
+  return playStatusSoundReducer(state, { status: TetrisFsmState.PoweredOn });
+}
+
+export function powerOffReducer(state: AudioModel) : AudioModel {
+  var source = state.source;
+  if (source) {
+    source.stop();
+  }
+  return {...initialAudioState};
+}
+
+export function playClearSoundReducer(state: AudioModel): AudioModel {
+  var source = audio.getSource(state);
   if (state.soundsOn === true) {
-    var source = audio.getSource(state);
     if (source) {
       audio.playClear(source); 
     }
   }
 
-  return {...state};
+  return immutable.map(state, { source });
 }
