@@ -1,6 +1,9 @@
 import { Component, HostListener, Input } from '@angular/core';
+import { take } from 'rxjs';
 import { MovementEvent } from 'src/app/shared/models/movement.enum';
+import { TetrisFsmState } from 'src/app/shared/models/tetris-fsm-state.enum';
 import { TetrisActions } from 'src/app/shared/store/tetris.actions';
+import { selectStatus } from 'src/app/shared/store/tetris.selectors';
 import { ButtonComponent } from './button.component';
 
 @Component({
@@ -15,20 +18,28 @@ export class MovementButtonComponent extends ButtonComponent {
   @Input() override size: 'small' | 'normal' | 'long' = 'normal';
 
   override onClick(): void {
-    this.store.dispatch(TetrisActions.Movement({ movement: this.event }));
+      this.store.select(selectStatus).pipe(take(1)).subscribe((status) => {
+        if (status === TetrisFsmState.GameStarted) {
+          this.store.dispatch(TetrisActions.Movement({ movement: this.event }));
+        }
+      });
   }
 
   @HostListener("window:keydown", ['$event'])
   override onKeyDown(event?: KeyboardEvent) {
-    if (event === null || event?.key.toString() === this.keyEvent) {
+    var fromMouseOrPointer = !event;
+    var fromKey = event?.key.toString() === this.keyEvent;
+    if (fromMouseOrPointer || fromKey ) {
       super.onKeyDown(event);
-      this.onClick();
+      if (fromKey) {
+        this.onClick();
+      }
     }
   }
 
   @HostListener("window:keyup", ['$event'])
   override onKeyUp(event?: KeyboardEvent) {
-    if (event === null || event?.key.toString() === this.keyEvent) {
+    if (!event || event?.key.toString() === this.keyEvent) {
       super.onKeyUp(event);
     }
   }
