@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable, take, timer } from 'rxjs';
+import { Constants } from 'src/app/shared/consts';
 import { fieldHellper } from 'src/app/shared/helpers/fieldmatrix.helper';
 import { AudioActions } from 'src/app/shared/store/audio.actions';
 import { TetrisActions } from 'src/app/shared/store/tetris.actions';
@@ -16,7 +17,7 @@ export class PlayfieldRemovingComponent extends PlayfieldComponent implements On
 
   override view$ = this.removeFullRows(); 
 
-  playfield: number[][] = [];
+  playfield: number[][] = fieldHellper.initialize(Constants.PlayfieldWidth, Constants.PlayfieldHeight, 0);
 
   constructor(store: Store) { super(store); }  
 
