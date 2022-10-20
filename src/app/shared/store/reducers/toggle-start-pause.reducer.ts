@@ -1,6 +1,7 @@
 import { fieldHellper } from "../../helpers/fieldmatrix.helper";
 import { immutable } from "../../helpers/immutable.helper";
 import { randomPieceDirection, randomPieceShape } from "../../helpers/piece.helper";
+import { tetrisStorage } from "../../helpers/storage.helper";
 import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../../models/tetris.model";
 
@@ -22,9 +23,11 @@ export function toggleStartPauseReducer(state: TetrisModel): TetrisModel {
 
   if (TetrisFsmState.GameStarted === state.status)
   {
-    return immutable.map(state, {
+    var newState = immutable.map(state, {
       status: TetrisFsmState.Paused,
     });
+    tetrisStorage.save(newState);
+    return newState;
   }
 
   if (TetrisFsmState.Paused === state.status)

@@ -1,4 +1,5 @@
 import { immutable } from "../../helpers/immutable.helper";
+import { tetrisStorage } from "../../helpers/storage.helper";
 import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../../models/tetris.model";
 import { initialTetrisState } from "../initial-state";
@@ -12,5 +13,6 @@ export function powerOffReducer(state: TetrisModel): TetrisModel {
 }
 
 function setStatusReducer(state: TetrisModel, { status }: {status: TetrisFsmState}): TetrisModel {
+  tetrisStorage.clear();
   return immutable.map(state, { status });
 }
