@@ -1,3 +1,4 @@
+import { Constants } from "../consts";
 import { AudioModel } from "../models/audio.model";
 import { TetrisFsmState } from "../models/tetris-fsm-state.enum";
 import { TetrisModel } from "../models/tetris.model";
@@ -7,7 +8,7 @@ export const initialTetrisState: TetrisModel = {
   status: TetrisFsmState.Ready,
 
   score: 0,
-  speedLevel: 1,
+  speedLevel: Constants.MinSpeedLevel,
 
   nextPieceShape: undefined,
   nextPieceDirection: undefined,

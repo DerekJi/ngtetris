@@ -9,6 +9,7 @@ import { setReadyReducer } from "./reducers/set-ready.reducer";
 import { powerOffReducer, powerOnReducer } from "./reducers/toggle-power-on-off.reducer";
 import { removeReducer } from "./reducers/remove.reducer";
 import { loadProgressReducer } from "./reducers/load-progress.reducer";
+import { speedLevelReducer } from "./reducers/speed-level.reducer";
 
 export const tetrisReducer = createReducer(initialTetrisState,
 
@@ -28,4 +29,6 @@ export const tetrisReducer = createReducer(initialTetrisState,
   on(TetrisActions.Tick, tickReducer),
 
   on(TetrisActions.RemoveFullRows, removeReducer),
+
+  on(TetrisActions.ChangeSpeedLevel, speedLevelReducer),
 );

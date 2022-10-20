@@ -3,17 +3,17 @@ import { TetrisActions } from 'src/app/shared/store/tetris.actions';
 import { ButtonComponent } from './button.component';
 
 @Component({
-  selector: 'app-reset-button',
+  selector: 'app-speed-level-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
-export class ResetButtonComponent extends ButtonComponent {
+export class SpeedLevelButtonComponent extends ButtonComponent {
 
-  @Input() override action: string = 'RESET';
+  @Input() override action: string = 'SPEED';
   @Input() override size: 'small' | 'normal' = 'small';
-  @Input() override button = 'btn-reset';
+  @Input() override button = 'btn-speed';
 
   override onClick(): void {
-    this.store.dispatch(TetrisActions.Reset());    
+    this.store.dispatch(TetrisActions.ChangeSpeedLevel());    
   }
 }

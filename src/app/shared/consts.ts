@@ -11,4 +11,7 @@ export const Constants = {
 
   PieceShapesNumber: 7,
   PieceDirectionNUmber: 4,
+
+  MaxSpeedLevel: 10,
+  MinSpeedLevel: 1,
 };

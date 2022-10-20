@@ -22,6 +22,7 @@ import { PlayfieldReadyComponent } from './screen/playfield/playfield-ready.comp
 import { FieldTopReadyComponent } from './screen/field-top-ready/field-top-ready.component';
 import { PlayfieldRemovingComponent } from './screen/playfield/playfield-removing.component';
 import { FieldTopGameoverComponent } from './screen/field-top-gameover/field-top-gameover.component';
+import { SpeedLevelButtonComponent } from './keyboard/button/speed-level-button.component';
 
 const buttons = [
   PowerButtonComponent,
@@ -29,6 +30,7 @@ const buttons = [
   SoundButtonComponent,
   StartButtonComponent,
   MovementButtonComponent,
+  SpeedLevelButtonComponent,
 ];
 
 const playfields = [

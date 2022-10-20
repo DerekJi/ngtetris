@@ -13,6 +13,7 @@ const Movement = createAction('[Tetris] Movement', props<{ movement: MovementEve
 const RemoveFullRows = createAction('[Tetris] Remove Full Rows');
 const Tick = createAction('[Tetris] Tick');
 
+const ChangeSpeedLevel = createAction('[Tetris] Change Speed Level');
 
 export const TetrisActions = {
   PowerOn,
@@ -24,4 +25,5 @@ export const TetrisActions = {
   Movement,
   RemoveFullRows,
   Tick,
+  ChangeSpeedLevel,
 };
