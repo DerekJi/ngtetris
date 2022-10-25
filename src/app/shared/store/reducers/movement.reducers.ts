@@ -5,6 +5,7 @@ import { immutable } from "../../helpers/immutable.helper";
 import { getMoveDownModel, getMoveLeftModel, getMoveRightModel, getRotateAntiClockwiseModel, getRotateClockwiseModel } from "../../helpers/moves.helper";
 import { getCurrentPiece, getPieceMatrix, getPieceTop, randomPieceDirection, randomPieceShape } from "../../helpers/piece.helper";
 import { score } from "../../helpers/score.helper";
+import { tetrisStorage } from "../../helpers/storage.helper";
 import { MovementEvent } from "../../models/movement.enum";
 import { PieceModel } from "../../models/piece.model";
 import { TetrisFsmState } from "../../models/tetris-fsm-state.enum";
@@ -174,6 +175,9 @@ function reachedBottomReducer(state: TetrisModel): TetrisModel {
     var pieceMatrix = getPieceMatrix(state.currentPieceShape, state.currentPieceDirection);
     var minTop = getPieceTop(pieceMatrix);
     if (minTop === 0) {
+      var newScore = score.onPieceToBottom(state.score);
+      tetrisStorage.saveHighestScore(newScore);
+      var highestScore = tetrisStorage.loadHighestScore();
       return immutable.map(state, {
         status: TetrisFsmState.GameOver,
         playfieldMatrix: field,
@@ -183,13 +187,14 @@ function reachedBottomReducer(state: TetrisModel): TetrisModel {
         currentPieceDirection: undefined,
         nextPieceShape: randomPieceShape(),
         nextPieceDirection: randomPieceDirection(),
-        score: score.onPieceToBottom(state.score),
+        score: newScore,
+        highestScore,
       });   
     }
   }
   
   var initialPieceTop = state.nextPieceShape && state.nextPieceDirection ? fieldHellper.initialPieceTop(state.nextPieceShape, state.nextPieceDirection) : -1;
-
+  
   return immutable.map(state, {
     playfieldMatrix: field,
     currentTop: initialPieceTop,

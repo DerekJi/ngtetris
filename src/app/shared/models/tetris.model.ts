@@ -6,6 +6,7 @@ export interface TetrisModel {
   status: TetrisFsmState,
 
   score: number,
+  highestScore: number,
   speedLevel: number,
 
   currentPieceShape?: PieceShape,

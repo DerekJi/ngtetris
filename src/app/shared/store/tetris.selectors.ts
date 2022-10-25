@@ -36,3 +36,5 @@ export const selectShouldRemove = createSelector(selectFullRowsCount, selectStat
 
 export const selectGameRunning = createSelector(selectStatus, selectShouldRemove,
   (status, should) => !should && (status === TetrisFsmState.GameStarted || status === TetrisFsmState.Paused || status === TetrisFsmState.GameOver));
+
+export const selectHighestScore = createSelector(selectRoot, (root) => root.highestScore);
