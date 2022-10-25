@@ -1,6 +1,7 @@
 <section [ngClass]="poweredOff$ | async">
 
-  <app-number-panel label="SCORE" [number]="score$ | async"></app-number-panel>
+  <app-number-panel *ngIf="running$ | async" label="SCORE" [number]="score$ | async"></app-number-panel>
+  <app-number-panel *ngIf="notRunning$ | async" label="HIGHEST SCORE" [number]="highestScore$ | async"></app-number-panel>
   <app-number-panel label="SPEED LEVEL" [number]="speedLevel$ | async"></app-number-panel>
   <app-next-piece-panel></app-next-piece-panel>  
 

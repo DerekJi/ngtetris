@@ -2,6 +2,19 @@ import { TetrisModel } from "../models/tetris.model";
 
 const storage = localStorage;
 const storageKey: string = 'tetris';
+const highestScoreKey = `${storageKey}.highestScore`;
+
+function saveHighestScore(score: number): void {
+    var currentHighest = loadHighestScore();
+    if (score > currentHighest) {
+        storage.setItem(highestScoreKey, score.toString());
+    }
+}
+
+function loadHighestScore(): number {
+    var value = storage.getItem(highestScoreKey);
+    return !value ? 0 : Number.parseInt(value);
+}
 
 function save(state?: TetrisModel): void {
     if (!state) return;
@@ -25,5 +38,7 @@ function clear(): void {
 export const tetrisStorage = {
     save,
     load,
+    saveHighestScore,
+    loadHighestScore,
     clear,
 }
