@@ -14,5 +14,6 @@ export function powerOffReducer(state: TetrisModel): TetrisModel {
 
 function setStatusReducer(state: TetrisModel, { status }: {status: TetrisFsmState}): TetrisModel {
   tetrisStorage.clear();
-  return immutable.map(state, { status });
+  var highestScore = tetrisStorage.loadHighestScore();
+  return immutable.map(state, { status, highestScore });
 }

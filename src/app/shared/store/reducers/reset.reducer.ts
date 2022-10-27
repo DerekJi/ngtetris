@@ -7,9 +7,11 @@ import { initialTetrisState } from "../initial-state";
 export function resetReducer(state: TetrisModel): TetrisModel {
   tetrisStorage.clear();
 
+  var highestScore = tetrisStorage.loadHighestScore();
   if (state.status !== TetrisFsmState.PoweredOff) {
     return immutable.map(initialTetrisState, {
       status: TetrisFsmState.PoweredOn,
+      highestScore,
     });
   }
 
